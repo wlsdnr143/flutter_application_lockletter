@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "979882540025",
+    "project_id": "sign-in-c97e8",
+    "storage_bucket": "sign-in-c97e8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979882540025:android:ac820a42b849b491dd5b28",
+        "android_client_info": {
+          "package_name": "com.example.fluttergooglesignin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "979882540025-baqc0gkr1d3gsl0pkebdp2khlbebvij4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fluttergooglesignin",
+            "certificate_hash": "c7050661586d23552421dcecc57e418046597364"
+          }
+        },
+        {
+          "client_id": "979882540025-go9tfkful5naorhrj2uh33gkau3ma84d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fluttergooglesignin",
+            "certificate_hash": "e5191c92483b6e25f6a23c3895db4095a7cee266"
+          }
+        },
+        {
+          "client_id": "979882540025-jhapfj80fv078naojm48akg7qvpn6l0k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fluttergooglesignin",
+            "certificate_hash": "eb470c21cdd9c63520f96e99b53b96f7dac53fab"
+          }
+        },
+        {
+          "client_id": "979882540025-86fo6vghf2i1hf5br3dgjmqt4v819ne4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2S2ljzmUV9KHBSNk5EptRoQ0SQ6CW7Fo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "979882540025-86fo6vghf2i1hf5br3dgjmqt4v819ne4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
