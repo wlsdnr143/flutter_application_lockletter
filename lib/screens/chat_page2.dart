@@ -207,16 +207,12 @@ class _ChatPage2State extends State<ChatPage2> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-          appBar:AppBar(
-            backgroundColor:Colors.white,
-            title:const Text(
-                '우체통',
-                style:TextStyle(
-                    color:Colors.black,
-                    fontWeight:FontWeight.w500,
-                    fontFamily:"NotoSansCJKKR",
-                    fontSize:25.0
-                )
+          appBar: AppBar(
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+            elevation:0.0,
+            title: Text('${widget.peerNickname}와 주고받은 편지'.trim(),
+                style: const TextStyle(color:Colors.black)
             ),
             bottom:const TabBar(
                 tabs:<Widget>[

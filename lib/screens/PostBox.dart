@@ -11,7 +11,7 @@ class PostBox extends StatelessWidget {
             appBar:AppBar(
               backgroundColor:Colors.white,
               title:const Text(
-                  '우체통',
+                  '야채통',
                   style:TextStyle(
                       color:Colors.black,
                       fontWeight:FontWeight.w500,
@@ -23,7 +23,7 @@ class PostBox extends StatelessWidget {
                   tabs:<Widget>[
                     Tab(
                       child:Text(
-                          '받은편지함',
+                          '은편지함',
                           style:TextStyle(
                               color:Colors.black,
                               fontSize:13.0

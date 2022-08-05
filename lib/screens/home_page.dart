@@ -181,20 +181,20 @@ class _HomePageState extends State<HomePage> {
               '잠긴편지',
               style: TextStyle(color:Colors.black),
             ),
-            actions: [
-              IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
+            leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
                   onPressed: () => googleSignOut(),
                   color: Colors.black,
                   icon: const Icon(Icons.logout)),
+            actions: [
               IconButton(
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()));
+                        context, MaterialPageRoute(
+                        builder:(_) => SelectPerson_test())
+                    );
                   },
                   color: Colors.black,
-                  icon: const Icon(Icons.person)), // 우측 상단 사람 모양
+                  icon: const Icon(Icons.local_post_office_outlined)),
             ]),
 
         // body: WillPopScope( // 취소키를 눌러도 뒤로가지 못하게 하기 위함

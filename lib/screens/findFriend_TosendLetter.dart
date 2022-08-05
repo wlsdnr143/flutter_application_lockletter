@@ -21,14 +21,14 @@ import '../utilities/keyboard_utils.dart';
 import 'chat_page.dart';
 import 'login_page.dart';
 
-class HomePage_Sub extends StatefulWidget {
-  const HomePage_Sub({Key? key}) : super(key: key);
+class FindFriend_TosendLetter extends StatefulWidget {
+  const FindFriend_TosendLetter({Key? key}) : super(key: key);
 
   @override
-  State<HomePage_Sub> createState() => _HomePage_SubState();
+  State<FindFriend_TosendLetter> createState() => _FindFriend_TosendLetterState();
 }
 
-class _HomePage_SubState extends State<HomePage_Sub> {
+class _FindFriend_TosendLetterState extends State<FindFriend_TosendLetter> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final ScrollController scrollController = ScrollController();
 
@@ -212,26 +212,27 @@ class _HomePage_SubState extends State<HomePage_Sub> {
               '잠긴편지',
               style: TextStyle(color:Colors.black),
             ),
-            actions: [
-              // IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
-              //     onPressed: () => googleSignOut(),
-              //     icon: const Icon(Icons.logout)),
-              IconButton(
-                  onPressed: () {
-                    FlutterDialog();
-                  },
-                  color: Colors.black,
-                  icon: const Icon(Icons.ac_unit_outlined)),
-              IconButton(
-                  color: Colors.black,
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()));
-                  },
-                  icon: const Icon(Icons.person)),
-            ]),
+            // actions: [
+            //   // IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
+            //   //     onPressed: () => googleSignOut(),
+            //   //     icon: const Icon(Icons.logout)),
+            //   IconButton(
+            //       onPressed: () {
+            //         FlutterDialog();
+            //       },
+            //       color: Colors.black,
+            //       icon: const Icon(Icons.ac_unit_outlined)),
+            //   IconButton(
+            //       color: Colors.black,
+            //       onPressed: () {
+            //         Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => const ProfilePage()));
+            //       },
+            //       icon: const Icon(Icons.person)),
+            //]
+        ),
         body: WillPopScope(
           onWillPop: null,
           child: Stack(

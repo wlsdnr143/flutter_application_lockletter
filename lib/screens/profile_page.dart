@@ -150,9 +150,13 @@ class _ProfilePageState extends State<ProfilePage> {
     return
         Scaffold(
           appBar: AppBar(
-            title: const Text(
-              AppConstants.profileTitle,
-            ),
+              backgroundColor: Colors.transparent,
+              elevation:0.0,
+              centerTitle: true,
+              title: const Text(
+                '마이페이지',
+                style: TextStyle(color:Colors.black),
+              ),
           ),
           body: Stack(
             children: [
@@ -209,82 +213,186 @@ class _ProfilePageState extends State<ProfilePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const Text('Name', style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.spaceCadet,
-                          ),),
                           TextField(
                             decoration: kTextInputDecoration.copyWith(
-                                hintText: 'Write your Name'),
+                                hintText: '이름을 적어주세요'),
                             controller: displayNameController,
                             onChanged: (value) {
                               displayName = value;
                             },
                             focusNode: focusNodeNickname,
                           ),
+                          SizedBox(height:50),
                           vertical15,
-                          const Text('About Me...', style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.spaceCadet
-                          ),),
-                          TextField(
-                            decoration: kTextInputDecoration.copyWith(
-                                hintText: 'Write about yourself...'),
-                            onChanged: (value) {
-                              aboutMe = value;
-                            },
-                          ),
-                          vertical15,
-                          const Text('Select Country Code', style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.spaceCadet,
-                          ),),
-                          Container(
-                            width: double.infinity,
-                            alignment: Alignment.centerLeft,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black, width: 1.5),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: CountryCodePicker(
-                              onChanged: (country) {
-                                setState(() {
-                                  dialCodeDigits = country.dialCode!;
-                                });
-                              },
-                              initialSelection: 'IN',
-                              showCountryOnly: false,
-                              showOnlyCountryWhenClosed: false,
-                              favorite: const ["+1", "US", "+91", "IN"],
-                            ),
-                          ),
-                          vertical15,
-                          const Text('Phone Number', style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.bold,
-                            color: AppColors.spaceCadet,
-                          ),),
-                          TextField(
-                            decoration: kTextInputDecoration.copyWith(
-                              hintText: 'Phone Number',
-                              prefix: Padding(
-                                padding: const EdgeInsets.all(4),
-                                child: Text(dialCodeDigits,
-                                  style: const TextStyle(color: Colors.grey),),
+                            Card(
+                              child:ListTile(
+                                title: const Text(
+                                    '잠긴편지 보내기',
+                                    style: TextStyle(
+                                        color:Color(0xff433e50),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "NotoSansCJKKR",
+                                        fontStyle:FontStyle.normal,
+                                        fontSize: 20.0
+                                    ),
+                                    textAlign: TextAlign.left
+                                ),
+                                onTap: (){
+                                  print('잠긴편지보내기');
+                                },
+                                trailing: Icon(Icons.add,color:Colors.blue),
                               ),
                             ),
-                            controller: _phoneController,
-                            maxLength: 12,
-                            keyboardType: TextInputType.number,
+                            Card(
+                              child:ListTile(
+                                title: Text(
+                                    '친구 목록 관리',
+                                    style: TextStyle(
+                                        color:Color(0xff433e50),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "NotoSansCJKKR",
+                                        fontStyle:FontStyle.normal,
+                                        fontSize: 20.0
+                                    ),
+                                    textAlign: TextAlign.left
+                                ),
+                                onTap: (){
+                                  print('친구 목록 관리');
+                                },
+                                trailing: Icon(Icons.add,color:Colors.blue),
+                              ),
+                            ),
+                            Card(
+                              child:ListTile(
+                                title: const Text(
+                                    '구매 목록 관리',
+                                    style: TextStyle(
+                                        color:Color(0xff433e50),
+                                        fontWeight: FontWeight.w400,
+                                        fontFamily: "NotoSansCJKKR",
+                                        fontStyle:FontStyle.normal,
+                                        fontSize: 20.0
+                                    ),
+                                    textAlign: TextAlign.left
+                                ),
+                                onTap: (){
+                                  print('구매 목록 관리');
+                                },
+                                trailing: Icon(Icons.add,color:Colors.blue),
+                              ),
+                            ),
+                            SizedBox(height:50),
+                          ],
+                      ),
+                      const Text(
+                        '즐겨찾는 필체',
+                        style: TextStyle(
+                            color:  Color(0xff000000),
+                            fontWeight: FontWeight.w400,
+                            fontFamily: "",
+                            fontStyle:  FontStyle.normal,
+                            fontSize: 20.0
+                        ),
+                        textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                  width: 70,
+                                  height:70,
+                                  child:Image(
+                                    image:AssetImage('assets/images/before_login.png'),
+                                  )
+                              ),
+                              const Text(
+                                  "김채원체",
+                                  style: TextStyle(
+                                      color:Color(0xff000000),
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "S-CoreDream-3",
+                                      fontStyle:  FontStyle.normal,
+                                      fontSize: 18.0
+                                  ),
+                                  textAlign: TextAlign.left
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                  width: 70,
+                                  height:70,
+                                  child:Image(
+                                    image:AssetImage('assets/images/before_login.png'),
+                                  )
+                              ),
+                              const Text(
+                                  "방진욱체",
+                                  style: TextStyle(
+                                      color:Color(0xff000000),
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "S-CoreDream-3",
+                                      fontStyle:  FontStyle.normal,
+                                      fontSize: 18.0
+                                  ),
+                                  textAlign: TextAlign.left
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                  width: 70,
+                                  height:70,
+                                  child:const Image(
+                                    image:AssetImage('assets/images/before_login.png'),
+                                  )
+                              ),
+                              const Text(
+                                  "장도진체",
+                                  style: TextStyle(
+                                      color:Color(0xff000000),
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "S-CoreDream-3",
+                                      fontStyle:  FontStyle.normal,
+                                      fontSize: 18.0
+                                  ),
+                                  textAlign: TextAlign.left
+                              )
+                            ],
+                          ),
+                          Column(
+                            children: <Widget>[
+                              Container(
+                                  width: 70,
+                                  height:70,
+                                  child:const Image(
+                                    image:AssetImage('assets/images/before_login.png'),
+                                  )
+                              ),
+                              const Text(
+                                  "유혜린체",
+                                  style: TextStyle(
+                                      color:Color(0xff000000),
+                                      fontWeight: FontWeight.w300,
+                                      fontFamily: "S-CoreDream-3",
+                                      fontStyle:  FontStyle.normal,
+                                      fontSize: 18.0
+                                  ),
+                                  textAlign: TextAlign.left
+                              )
+                            ],
                           ),
                         ],
                       ),
+                      SizedBox(height: 100),
                       ElevatedButton(onPressed: updateFirestoreData, child:const Padding(
                         padding:  EdgeInsets.all(8.0),
-                        child:  Text('Update Info'),
+                        child:  Text('프로필 업데이트'),
                       )),
 
                     ],

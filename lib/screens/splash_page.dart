@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fluttergooglesignin/screens/home_page_sub.dart';
+import 'package:fluttergooglesignin/screens/findFriend_TosendLetter.dart';
+import 'package:fluttergooglesignin/screens/profile_page.dart';
 import 'package:provider/provider.dart';
 import '../allConstants/color_constants.dart';
 import '../allConstants/size_constants.dart';
@@ -9,7 +10,7 @@ import 'MyPage.dart';
 import 'SelectPerson_test.dart';
 import 'Setting.dart';
 import 'home_page.dart';
-import 'home_page_sub.dart';
+import 'findFriend_TosendLetter.dart';
 import 'login_page.dart';
 
 class SplashPage extends StatefulWidget {
@@ -86,8 +87,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   final List<Widget> _children = <Widget>[
     const HomePage(),
     const LetterBottle(),
-    const MyPage(),
-    const SelectPerson_test(),
+    const ProfilePage(),
+    const Setting(),
   ];
 
   void _onItemTapped(int index) {

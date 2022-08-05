@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'SelectRelease.dart';
 import 'PostBox.dart';
 import 'SelectRelease.dart';
-import 'home_page_sub.dart';
+import 'findFriend_TosendLetter.dart';
 
 class SelectLetter extends StatelessWidget {
   const SelectLetter({ Key? key }) : super(key: key);
@@ -66,7 +66,7 @@ class SelectLetter extends StatelessWidget {
                   onTap: (){
                     Navigator.push(
                         context, MaterialPageRoute(
-                        builder:(_) => HomePage_Sub()
+                        builder:(_) => const FindFriend_TosendLetter()
                     )
                     );
                     print('잠긴 편지 작성하기');

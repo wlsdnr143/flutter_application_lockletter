@@ -8,7 +8,7 @@ class MyPage extends StatelessWidget {
     return Scaffold(
         appBar:AppBar(
           backgroundColor:Colors.white,
-          title:Text(
+          title:const Text(
               "마이페이지",
               style: TextStyle(
                   color: Color(0xff191919),
@@ -22,7 +22,7 @@ class MyPage extends StatelessWidget {
           elevation:0.0,
           actions: <Widget>[
             IconButton(
-              icon:Icon(Icons.money),
+              icon:const Icon(Icons.money),
               color: Colors.black,
               onPressed: (){
                 print('???');
@@ -46,16 +46,16 @@ class MyPage extends StatelessWidget {
     return Container(
         child:Row(
             children:[
-              SizedBox(width: 10),
-              CircleAvatar(
+              const SizedBox(width: 10),
+              const CircleAvatar(
                 backgroundColor: Colors.blue,
                 backgroundImage:AssetImage(''),
                 radius:20.0,
               ),
-              SizedBox(width:10),
+              const SizedBox(width:10),
               Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children:[
+                  children:const [
                     Text(
                       '@slowbe',
                       style: TextStyle(
@@ -98,13 +98,13 @@ class MyPage extends StatelessWidget {
 }
 Widget _buildMiddle(){
   return ListView(
-    physics: NeverScrollableScrollPhysics(),
+    physics: const NeverScrollableScrollPhysics(),
     shrinkWrap: true,
     padding:EdgeInsets.zero,
     children: <Widget>[
       Card(
         child:ListTile(
-          title: Text(
+          title: const Text(
               '잠긴편지 보내기',
               style: TextStyle(
                   color:Color(0xff433e50),
@@ -118,7 +118,7 @@ Widget _buildMiddle(){
           onTap: (){
             print('잠긴편지보내기');
           },
-          trailing: Icon(Icons.add,color:Colors.blue),
+          trailing: const Icon(Icons.add,color:Colors.blue),
         ),
       ),
       Card(
@@ -142,7 +142,7 @@ Widget _buildMiddle(){
       ),
       Card(
         child:ListTile(
-          title: Text(
+          title: const Text(
               '구매 목록 관리',
               style: TextStyle(
                   color:Color(0xff433e50),
@@ -213,7 +213,7 @@ Widget _buildBottom(){
                       image:AssetImage('assets/images/before_login.png'),
                     )
                 ),
-                Text(
+                const Text(
                     "방진욱체",
                     style: TextStyle(
                         color:Color(0xff000000),
@@ -231,11 +231,11 @@ Widget _buildBottom(){
                 Container(
                     width: 70,
                     height:70,
-                    child:Image(
+                    child:const Image(
                       image:AssetImage('assets/images/before_login.png'),
                     )
                 ),
-                Text(
+                const Text(
                     "장도진체",
                     style: TextStyle(
                         color:Color(0xff000000),
@@ -253,11 +253,11 @@ Widget _buildBottom(){
                 Container(
                     width: 70,
                     height:70,
-                    child:Image(
+                    child:const Image(
                       image:AssetImage('assets/images/before_login.png'),
                     )
                 ),
-                Text(
+                const Text(
                     "유혜린체",
                     style: TextStyle(
                         color:Color(0xff000000),
@@ -272,8 +272,8 @@ Widget _buildBottom(){
             ),
           ],
         ),
-        SizedBox(height: 20),
-        VerticalDivider(
+        const SizedBox(height: 20),
+        const VerticalDivider(
             color: Color.fromARGB(255, 211, 211, 211),
             thickness: 1.0),
       ]
@@ -283,7 +283,7 @@ Widget _buildBottom(){
 
 Widget _buildFourth(){
   return Column(
-      children:<Widget>[
+      children:const <Widget>[
         ListTile(
             title: Text(
                 'FAQ',

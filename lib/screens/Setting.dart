@@ -1,3 +1,5 @@
+//여기다가 Setting 페이지 제작
+
 import 'package:flutter/material.dart';
 
 class Setting extends StatelessWidget {
@@ -8,14 +10,10 @@ class Setting extends StatelessWidget {
     return Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-              child: Column(children: <Widget>[
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+              child: Column(children: const <Widget>[
                 Center(
-                  child: Image.asset('assets/images/before_login.png', fit:BoxFit.fill),
                 ),
-                SizedBox(height: 200),
-                Image.asset('assets/images/before_login.png'),
-                //Image.asset('assets/letter2.PNG'),
               ])
           ),
         )

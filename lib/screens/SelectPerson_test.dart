@@ -208,7 +208,11 @@ class _SelectPerson_testState extends State<SelectPerson_test> {
     return Scaffold(
         appBar: AppBar(
             centerTitle: true,
-            title: const Text('잠긴편지'),
+            backgroundColor: Colors.white,
+            title: const Text(
+              '우체통',
+              style: TextStyle(color:Colors.black),
+            ),
             actions: [
               // IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
               //     onPressed: () => googleSignOut(),
