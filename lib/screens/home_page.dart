@@ -28,8 +28,11 @@ import 'chat_page.dart';
 import 'login_page.dart';
 
 final imageList=[
-  Image.asset('assets/images/before_login.png',fit:BoxFit.cover),
-  Image.asset('assets/images/letter.jpg',fit:BoxFit.cover)
+  Image.asset('assets/images/banner1.jpeg',fit:BoxFit.cover),
+  Image.asset('assets/images/배너2.PNG',fit:BoxFit.cover),
+  Image.asset('assets/images/배너3.JPG',fit:BoxFit.cover),
+  Image.asset('assets/images/배너4.PNG',fit:BoxFit.cover),
+  Image.asset('assets/images/배너5.PNG',fit:BoxFit.cover)
 ];
 
 class HomePage extends StatefulWidget {
@@ -196,59 +199,6 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.black,
                   icon: const Icon(Icons.local_post_office_outlined)),
             ]),
-
-        // body: WillPopScope( // 취소키를 눌러도 뒤로가지 못하게 하기 위함
-        //   onWillPop: ()  {
-        //     return Future(() => false); //뒤로가기 막음
-        //   },
-        //   child: Stack(
-        //     children: [
-        //       Column(
-        //         children: const [
-        //
-        //           // buildSearchBar(),
-        //           // Expanded(
-        //           //   child: StreamBuilder<QuerySnapshot>(
-        //           //     stream: homeProvider.getFirestoreData(
-        //           //         FirestoreConstants.pathUserCollection,
-        //           //         _limit,
-        //           //         _textSearch),
-        //           //     builder: (BuildContext context,
-        //           //         AsyncSnapshot<QuerySnapshot> snapshot) {
-        //           //       if (snapshot.hasData) {
-        //           //         if ((snapshot.data?.docs.length ?? 0) > 0) {
-        //           //           return ListView.separated(
-        //           //             shrinkWrap: true,
-        //           //             itemCount: snapshot.data!.docs.length,
-        //           //             itemBuilder: (context, index) => buildItem(
-        //           //                 context, snapshot.data?.docs[index]),
-        //           //             controller: scrollController,
-        //           //             separatorBuilder:
-        //           //                 (BuildContext context, int index) =>
-        //           //                     const Divider(),
-        //           //           );
-        //           //         } else {
-        //           //           return const Center(
-        //           //             child: Text('No user found...'),
-        //           //           );
-        //           //         }
-        //           //       } else {
-        //           //         return const Center(
-        //           //           child: CircularProgressIndicator(),
-        //           //         );
-        //           //       }
-        //           //     },
-        //           //   ),
-        //           // ),
-        //         ],
-        //       ),
-        //       Positioned(
-        //         child:
-        //             isLoading ? const LoadingView() : const SizedBox.shrink(),
-        //       ),
-        //     ],
-        //   ),
-        // )
       body:ListView(
         children:<Widget>[
           _buildSliderBar(),
@@ -293,11 +243,11 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     children: const [
                       Text(
-                        "깊이 잠긴 마음 담아.",
+                        "    깊이 잠긴 마음 담아.",
                         style: TextStyle(
                             color:  Color(0xff191919),
                             fontWeight: FontWeight.w400,
-                            fontFamily: 'Ghanachocolate',
+                            fontFamily: 'Ghana',
                             fontStyle:  FontStyle.normal,
                             fontSize: 30.0
                         ),

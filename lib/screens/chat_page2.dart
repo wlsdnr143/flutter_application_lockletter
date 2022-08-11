@@ -267,60 +267,6 @@ class _ChatPage2State extends State<ChatPage2> {
     );
   }
 
-  // Widget buildMessageInput() { // 사용자가 문자 메시지를 입력하고 보내기 버튼을 클릭하여 메시지를 보낼 입력 필드를 만들어야 합니다 .
-  //   // 또한 이미지 선택기 버튼을 사용하여 사용자가 클릭하면 장치의 파일 선택기가 열리고 이미지를 선택하여 사용자에게 보냅니다.
-  //   return SizedBox(
-  //     width: double.infinity,
-  //     height: 50,
-  //     child: Row(
-  //       children: [
-  //         Container(
-  //           margin: const EdgeInsets.only(right: Sizes.dimen_4),
-  //           decoration: BoxDecoration(
-  //             color: AppColors.burgundy,
-  //             borderRadius: BorderRadius.circular(Sizes.dimen_30),
-  //           ),
-  //           child: IconButton(
-  //             onPressed: getImage,
-  //             icon: const Icon(
-  //               Icons.camera_alt,
-  //               size: Sizes.dimen_28,
-  //             ),
-  //             color: AppColors.white,
-  //           ),
-  //         ),
-  //         Flexible(
-  //             child: TextField(
-  //           focusNode: focusNode,
-  //           textInputAction: TextInputAction.send,
-  //           keyboardType: TextInputType.text,
-  //           textCapitalization: TextCapitalization.sentences,
-  //           controller: textEditingController,
-  //           decoration:
-  //               kTextInputDecoration.copyWith(hintText: 'write here...'),
-  //           onSubmitted: (value) {
-  //             onSendMessage(textEditingController.text, MessageType.text);
-  //           },
-  //         )),
-  //         Container(
-  //           margin: const EdgeInsets.only(left: Sizes.dimen_4),
-  //           decoration: BoxDecoration(
-  //             color: AppColors.burgundy,
-  //             borderRadius: BorderRadius.circular(Sizes.dimen_30),
-  //           ),
-  //           child: IconButton(
-  //             onPressed: () {
-  //               onSendMessage(textEditingController.text, MessageType.text);
-  //             },
-  //             icon: const Icon(Icons.send_rounded),
-  //             color: AppColors.white,
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Widget buildItem(int index, DocumentSnapshot? documentSnapshot) {
     // 프로필 사진과 함께 주고받은 문자 메시지에 대한 채팅 풍선을 생성합니다.
     if (documentSnapshot != null) {
