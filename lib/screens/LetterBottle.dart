@@ -7,8 +7,18 @@ class LetterBottle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+            backgroundColor: Colors.white,
+            elevation:0.0,
+            centerTitle: true,
+            title: const Text(
+              '나에게 쓰는 편지',
+              style: TextStyle(color:Colors.black),
+            ),
+        ),
         body: Padding(
-            padding: const EdgeInsets.fromLTRB(0.0, 80.0, 0.0, 0.0),
+            padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
             child: Column(children: <Widget>[
               Center(
                 child: ElevatedButton(
@@ -29,15 +39,15 @@ class LetterBottle extends StatelessWidget {
                       '편지쓰기',
                       style: TextStyle(
                           color: Colors.black,
-                          fontSize: 20,
-                          fontFamily: 'KyoboHandwriting2019'),
+                          fontSize: 18,
+                          fontFamily: 'AppleSDGothicNeo'),
                     )),
               ),
-              const SizedBox(height: 80),
+              const SizedBox(height: 50),
               const Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsets.fromLTRB(30.0, 0.0, 0.0, 0.0),
                 child: Image(
-                  image: AssetImage('assets/images/before_login.png'),
+                  image: AssetImage('assets/images/letter_bottle.png'),
                   width: 400,
                   height: 400,
                 ),

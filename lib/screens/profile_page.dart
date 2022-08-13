@@ -139,7 +139,7 @@ class _ProfilePageState extends State<ProfilePage> {
       setState(() {
         isLoading = false;
       });
-      Fluttertoast.showToast(msg: 'UpdateSuccess');
+      Fluttertoast.showToast(msg: '변경이 완료되었습니다');
     }).catchError((onError) {
       Fluttertoast.showToast(msg: onError.toString());
     });
@@ -149,8 +149,9 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return
         Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.white,
               elevation:0.0,
               centerTitle: true,
               title: const Text(
@@ -166,124 +167,174 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      GestureDetector(
-                        onTap: getImage,
-                        child: Container(
-                          alignment: Alignment.center,
-                          child: avatarImageFile == null ? photoUrl.isNotEmpty ?
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(60),
-                            child: Image.network(photoUrl,
-                              fit: BoxFit.cover,
-                              width: 120,
-                              height: 120,
-                              errorBuilder: (context, object, stackTrace) {
-                                return const Icon(Icons.account_circle, size: 90,
-                                  color: AppColors.greyColor,);
-                              },
-                              loadingBuilder: (BuildContext context, Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  return child;
-                                }
-                                return SizedBox(
-                                  width: 90,
-                                  height: 90,
-                                  child: Center(
-                                    child: CircularProgressIndicator(
-                                      color: Colors.grey,
-                                      value: loadingProgress.expectedTotalBytes != null
-                                          ? loadingProgress.cumulativeBytesLoaded /
-                                          loadingProgress.expectedTotalBytes! : null,
-                                    ),
+                        Row(
+                          children: [
+                            GestureDetector(
+                              onTap: getImage,
+                              child: Container(
+                                alignment: Alignment.center,
+                                child: avatarImageFile == null ? photoUrl.isNotEmpty ?
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(60),
+                                  child: Image.network(photoUrl,
+                                    fit: BoxFit.cover,
+                                    width: 90,
+                                    height: 90,
+                                    errorBuilder: (context, object, stackTrace) {
+                                      return const Icon(Icons.account_circle, size: 120,
+                                        color: AppColors.greyColor,);
+                                    },
+                                    loadingBuilder: (BuildContext context, Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        return child;
+                                      }
+                                      return SizedBox(
+                                        width: 90,
+                                        height: 90,
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            color: Colors.grey,
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded /
+                                                loadingProgress.expectedTotalBytes! : null,
+                                          ),
+                                        ),
+                                      );
+                                    },
                                   ),
-                                );
-                              },
+                                ) : const Icon(Icons.account_circle,
+                                  size: 90,
+                                  color: AppColors.greyColor,)
+                                    : ClipRRect(
+                                  borderRadius: BorderRadius.circular(60),
+                                  child: Image.file(avatarImageFile!, width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,),),
+                                margin: const EdgeInsets.all(20),
+                              ),),
+                            Column(
+                              children: [
+                                Container(
+                                  width: 220,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                      //icon: Icon(Icons.person),
+                                      suffixIcon: GestureDetector(
+                                          child: const Icon(Icons.settings),
+                                        onTap: (){
+                                            print("안녕");
+                                        }
+                                      ),
+                                        enabledBorder: const OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            )
+                                        )
+                                    ),
+                                    controller: displayNameController,
+                                    onChanged: (value) {
+                                      displayName = value;
+                                    },
+                                    focusNode: focusNodeNickname,
+                                  ),
+                                ),
+                                Text(
+                                  '잠긴 글자: 0 글자                            ',
+                                  style: TextStyle(color:Color(0xff999999)),
+                                ),
+                                Text(
+                                  '보낸 편지 수: 0 장                           ',
+                                  style: TextStyle(color:Color(0xff999999)),
+                                ),
+                              ],
                             ),
-                          ) : const Icon(Icons.account_circle,
-                            size: 90,
-                            color: AppColors.greyColor,)
-                              : ClipRRect(
-                            borderRadius: BorderRadius.circular(60),
-                            child: Image.file(avatarImageFile!, width: 120,
-                              height: 120,
-                              fit: BoxFit.cover,),),
-                          margin: const EdgeInsets.all(20),
-                        ),),
+                          ],
+                        ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          TextField(
-                            decoration: kTextInputDecoration.copyWith(
-                                hintText: '이름을 적어주세요'),
-                            controller: displayNameController,
-                            onChanged: (value) {
-                              displayName = value;
-                            },
-                            focusNode: focusNodeNickname,
-                          ),
-                          SizedBox(height:50),
+                          ElevatedButton(
+                              style: TextButton.styleFrom(
+                                  minimumSize: const Size(50,30) // 버튼 크기를 지정해서 바꾸기
+                              ),
+                              onPressed: updateFirestoreData,
+                              child:const Padding(
+                            padding:  EdgeInsets.all(8.0),
+                            child:  Text('사용자 이름 변경'),
+                          )),
                           vertical15,
+                            // Card(
+                            //   child:ListTile(
+                            //     title: const Text(
+                            //         '즐겨찾기 목록 관리',
+                            //         style: TextStyle(
+                            //             color:Color(0xff433e50),
+                            //             fontWeight: FontWeight.w400,
+                            //             fontFamily: "AppleSDGothicNeo",
+                            //             fontStyle:FontStyle.normal,
+                            //             fontSize: 20.0
+                            //         ),
+                            //         textAlign: TextAlign.left
+                            //     ),
+                            //     onTap: (){
+                            //       print('즐겨찾기 목록 관리');
+                            //     },
+                            //     trailing: Icon(Icons.add,color:Colors.blue),
+                            //   ),
+                            // ),
                             Card(
-                              child:ListTile(
-                                title: const Text(
-                                    '잠긴편지 보내기',
-                                    style: TextStyle(
-                                        color:Color(0xff433e50),
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: "NotoSansCJKKR",
-                                        fontStyle:FontStyle.normal,
-                                        fontSize: 20.0
-                                    ),
-                                    textAlign: TextAlign.left
+                              child:Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  title: const Text(
+                                      '친구 목록 관리',
+                                      style: TextStyle(
+                                          color:Color(0xff433e50),
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "AppleSDGothicNeo",
+                                          fontStyle:FontStyle.normal,
+                                          fontSize: 20.0
+                                      ),
+                                      textAlign: TextAlign.left
+                                  ),
+                                  onTap: (){
+                                    print('친구 목록 관리');
+                                  },
+                                  trailing: Icon(Icons.add,color:Colors.blue),
                                 ),
-                                onTap: (){
-                                  print('잠긴편지보내기');
-                                },
-                                trailing: Icon(Icons.add,color:Colors.blue),
                               ),
                             ),
                             Card(
-                              child:ListTile(
-                                title: Text(
-                                    '친구 목록 관리',
-                                    style: TextStyle(
-                                        color:Color(0xff433e50),
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: "NotoSansCJKKR",
-                                        fontStyle:FontStyle.normal,
-                                        fontSize: 20.0
-                                    ),
-                                    textAlign: TextAlign.left
+                              child:Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                  title: const Text(
+                                      '구매 목록 관리',
+                                      style: TextStyle(
+                                          color:Color(0xff433e50),
+                                          fontWeight: FontWeight.w400,
+                                          fontFamily: "AppleSDGothicNeo",
+                                          fontStyle:FontStyle.normal,
+                                          fontSize: 20.0
+                                      ),
+                                      textAlign: TextAlign.left
+                                  ),
+                                  onTap: (){
+                                    print('구매 목록 관리');
+                                  },
+                                  trailing: Icon(Icons.add,color:Colors.blue),
                                 ),
-                                onTap: (){
-                                  print('친구 목록 관리');
-                                },
-                                trailing: Icon(Icons.add,color:Colors.blue),
                               ),
                             ),
-                            Card(
-                              child:ListTile(
-                                title: const Text(
-                                    '구매 목록 관리',
-                                    style: TextStyle(
-                                        color:Color(0xff433e50),
-                                        fontWeight: FontWeight.w400,
-                                        fontFamily: "NotoSansCJKKR",
-                                        fontStyle:FontStyle.normal,
-                                        fontSize: 20.0
-                                    ),
-                                    textAlign: TextAlign.left
-                                ),
-                                onTap: (){
-                                  print('구매 목록 관리');
-                                },
-                                trailing: Icon(Icons.add,color:Colors.blue),
-                              ),
-                            ),
-                            SizedBox(height:50),
+                            SizedBox(height:30),
                           ],
                       ),
+                      Container( height:5.0,
+                        width:1000.0,
+                        color:Color(0xfff1f1f5),),
+                      SizedBox(height:30),
                       const Text(
                         '즐겨찾는 필체',
                         style: TextStyle(
@@ -294,7 +345,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 20.0
                         ),
                         textAlign: TextAlign.left,
-                      ),
+                      ), // 즐겨찾는 필체 글씨
                       const SizedBox(height: 10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -313,9 +364,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   style: TextStyle(
                                       color:Color(0xff000000),
                                       fontWeight: FontWeight.w300,
-                                      fontFamily: "S-CoreDream-3",
+                                      fontFamily: "AppleSDGothicNeo",
                                       fontStyle:  FontStyle.normal,
-                                      fontSize: 18.0
+                                      fontSize: 15.0
                                   ),
                                   textAlign: TextAlign.left
                               )
@@ -335,9 +386,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   style: TextStyle(
                                       color:Color(0xff000000),
                                       fontWeight: FontWeight.w300,
-                                      fontFamily: "S-CoreDream-3",
+                                      fontFamily: "AppleSDGothicNeo",
                                       fontStyle:  FontStyle.normal,
-                                      fontSize: 18.0
+                                      fontSize: 15.0
                                   ),
                                   textAlign: TextAlign.left
                               )
@@ -357,9 +408,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   style: TextStyle(
                                       color:Color(0xff000000),
                                       fontWeight: FontWeight.w300,
-                                      fontFamily: "S-CoreDream-3",
+                                      fontFamily: "AppleSDGothicNeo",
                                       fontStyle:  FontStyle.normal,
-                                      fontSize: 18.0
+                                      fontSize: 15.0
                                   ),
                                   textAlign: TextAlign.left
                               )
@@ -379,22 +430,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                   style: TextStyle(
                                       color:Color(0xff000000),
                                       fontWeight: FontWeight.w300,
-                                      fontFamily: "S-CoreDream-3",
+                                      fontFamily: "AppleSDGothicNeo",
                                       fontStyle:  FontStyle.normal,
-                                      fontSize: 18.0
+                                      fontSize: 15.0
                                   ),
                                   textAlign: TextAlign.left
                               )
                             ],
                           ),
                         ],
-                      ),
+                      ), // 즐겨찾는 필체 사진 모음
                       SizedBox(height: 100),
-                      ElevatedButton(onPressed: updateFirestoreData, child:const Padding(
-                        padding:  EdgeInsets.all(8.0),
-                        child:  Text('프로필 업데이트'),
-                      )),
-
                     ],
                   ),
                 ),

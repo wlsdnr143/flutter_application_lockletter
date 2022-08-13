@@ -99,8 +99,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(child: _children.elementAt(_selectedIndex)),
-
       bottomNavigationBar: BottomNavigationBar(
         type:BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
