@@ -22,6 +22,20 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
+  bool _visibility = false;
+
+  void _show() {
+    setState(() {
+      _visibility = true;
+    });
+  }
+  void _hide() {
+    setState(() {
+      _visibility = false;
+    });
+  }
+
   TextEditingController? displayNameController;
   TextEditingController? aboutMeController;
   final TextEditingController _phoneController = TextEditingController();
@@ -153,9 +167,9 @@ class _ProfilePageState extends State<ProfilePage> {
           appBar: AppBar(
               backgroundColor: Colors.white,
               elevation:0.0,
-              centerTitle: true,
+              centerTitle: false,
               title: const Text(
-                '마이페이지',
+                '  마이페이지',
                 style: TextStyle(color:Colors.black),
               ),
           ),
@@ -163,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
             children: [
               SingleChildScrollView(
                   keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
@@ -216,15 +230,14 @@ class _ProfilePageState extends State<ProfilePage> {
                             Column(
                               children: [
                                 Container(
-                                  width: 220,
+                                  width: 200,
                                   child: TextField(
                                     decoration: InputDecoration(
                                       //icon: Icon(Icons.person),
                                       suffixIcon: GestureDetector(
                                           child: const Icon(Icons.settings),
-                                        onTap: (){
-                                            print("안녕");
-                                        }
+                                        onTap: ()
+                                          {_visibility? _hide() : _show();},
                                       ),
                                         enabledBorder: const OutlineInputBorder(
                                             borderSide: BorderSide(
@@ -241,11 +254,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 Text(
-                                  '잠긴 글자: 0 글자                            ',
+                                  '잠긴 글자: 0 글자                       ',
                                   style: TextStyle(color:Color(0xff999999)),
                                 ),
                                 Text(
-                                  '보낸 편지 수: 0 장                           ',
+                                  '보낸 편지 수: 0 장                      ',
                                   style: TextStyle(color:Color(0xff999999)),
                                 ),
                               ],
@@ -255,15 +268,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          ElevatedButton(
-                              style: TextButton.styleFrom(
-                                  minimumSize: const Size(50,30) // 버튼 크기를 지정해서 바꾸기
-                              ),
-                              onPressed: updateFirestoreData,
-                              child:const Padding(
-                            padding:  EdgeInsets.all(8.0),
-                            child:  Text('사용자 이름 변경'),
-                          )),
+                          Visibility(
+                            visible: _visibility,
+                            child: ElevatedButton(
+                                style: TextButton.styleFrom(
+                                    minimumSize: const Size(50,30) // 버튼 크기를 지정해서 바꾸기
+                                ),
+                                onPressed: updateFirestoreData,
+                                child:const Padding(
+                              padding:  EdgeInsets.all(5.0),
+                              child:  Text('사용자 이름 변경'),
+                            )),
+                          ),
                           vertical15,
                             // Card(
                             //   child:ListTile(
@@ -331,7 +347,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             SizedBox(height:30),
                           ],
                       ),
-                      Container( height:5.0,
+                      Container( height:8.0,
                         width:1000.0,
                         color:Color(0xfff1f1f5),),
                       SizedBox(height:30),
@@ -346,101 +362,33 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         textAlign: TextAlign.left,
                       ), // 즐겨찾는 필체 글씨
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 20),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                  width: 70,
-                                  height:70,
-                                  child:Image(
-                                    image:AssetImage('assets/images/before_login.png'),
-                                  )
-                              ),
-                              const Text(
-                                  "김채원체",
-                                  style: TextStyle(
-                                      color:Color(0xff000000),
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: "AppleSDGothicNeo",
-                                      fontStyle:  FontStyle.normal,
-                                      fontSize: 15.0
-                                  ),
-                                  textAlign: TextAlign.left
-                              )
-                            ],
+                          Container(
+                              width: 85,
+                              height:100,
+                              child: Image.asset('assets/images/favorite1.png', fit: BoxFit.fitWidth)
                           ),
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                  width: 70,
-                                  height:70,
-                                  child:Image(
-                                    image:AssetImage('assets/images/before_login.png'),
-                                  )
-                              ),
-                              const Text(
-                                  "방진욱체",
-                                  style: TextStyle(
-                                      color:Color(0xff000000),
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: "AppleSDGothicNeo",
-                                      fontStyle:  FontStyle.normal,
-                                      fontSize: 15.0
-                                  ),
-                                  textAlign: TextAlign.left
-                              )
-                            ],
+                          Container(
+                              width: 85,
+                              height:100,
+                              child: Image.asset('assets/images/favorite2.png', fit: BoxFit.fitWidth)
                           ),
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                  width: 70,
-                                  height:70,
-                                  child:const Image(
-                                    image:AssetImage('assets/images/before_login.png'),
-                                  )
-                              ),
-                              const Text(
-                                  "장도진체",
-                                  style: TextStyle(
-                                      color:Color(0xff000000),
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: "AppleSDGothicNeo",
-                                      fontStyle:  FontStyle.normal,
-                                      fontSize: 15.0
-                                  ),
-                                  textAlign: TextAlign.left
-                              )
-                            ],
+                          Container(
+                              width: 85,
+                              height:100,
+                              child: Image.asset('assets/images/favorite3.png', fit: BoxFit.fitWidth)
                           ),
-                          Column(
-                            children: <Widget>[
-                              Container(
-                                  width: 70,
-                                  height:70,
-                                  child:const Image(
-                                    image:AssetImage('assets/images/before_login.png'),
-                                  )
-                              ),
-                              const Text(
-                                  "유혜린체",
-                                  style: TextStyle(
-                                      color:Color(0xff000000),
-                                      fontWeight: FontWeight.w300,
-                                      fontFamily: "AppleSDGothicNeo",
-                                      fontStyle:  FontStyle.normal,
-                                      fontSize: 15.0
-                                  ),
-                                  textAlign: TextAlign.left
-                              )
-                            ],
+                          Container(
+                              width: 85,
+                              height:100,
+                              child: Image.asset('assets/images/favorite4.png', fit: BoxFit.fitWidth)
                           ),
                         ],
                       ), // 즐겨찾는 필체 사진 모음
-                      SizedBox(height: 100),
+                      SizedBox(height: 20),
                     ],
                   ),
                 ),

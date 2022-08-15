@@ -19,14 +19,13 @@ class Setting extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 30.0, 0.0, 0.0),
+              padding: const EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
               child: Column(
                   children: <Widget>[
-                    Text(
-                      '고객센터                                                                           ',
-                      style: TextStyle(color:Colors.black54),
+                    ListTile(
+                        title : Text('고객센터', style: TextStyle(color: Colors.black54)),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 5),
                     ListTile(
                       title : Text('FAQ'),
                       onTap: (){}
@@ -43,12 +42,12 @@ class Setting extends StatelessWidget {
                         title : Text('문의 내역'),
                         onTap: (){}
                     ),
-                    SizedBox(height:50),
-                    Text(
-                      '설정                                                                                 ',
-                      style: TextStyle(color:Colors.black54),
+                    SizedBox(height:30),
+                    ListTile(
+                      title: Text('설정',
+                      style: TextStyle(color:Colors.black54)),
                     ),
-                    SizedBox(height:10),
+                    SizedBox(height:5),
                     ListTile(
                         title : Text('설정'),
                         onTap: (){}

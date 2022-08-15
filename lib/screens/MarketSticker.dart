@@ -89,294 +89,239 @@ Widget _buildSliderBar(){ // 맨 위 슬라이드 위젯
 
 Widget _buildCutie(context){ // 오늘의 마켓 위젯
   return Container(
-    padding:const EdgeInsets.all(32),
-    child:Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:<Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              '귀엽다 귀여워',
-              style: TextStyle(
-                color:  Color(0xff191919),
-                fontWeight: FontWeight.w400,
-                fontFamily: "NotoSansCJKKR",
-                fontStyle:  FontStyle.normal,
-                fontSize: 20.0
-              ),
-              textAlign: TextAlign.left,
-            ),
-            TextButton(
-              onPressed:(){
-                // Navigator.push(
-                //   context, MaterialPageRoute(
-                //     builder:(_) => ()
-                //   )
-                // );
-              },
-              child:const Text(
-                '더보기',
+      padding:const EdgeInsets.all(15),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:<Widget>[
+          SizedBox(height:20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                '귀엽다 귀여워',
                 style: TextStyle(
-                  color: Color(0xff7b7b7b),
-                  fontWeight: FontWeight.w400,
-                  fontFamily:"AppleSDGothicNeo",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 10.0
+                    color:  Color(0xff191919),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "NotoSansKR_Regular",
+                    fontStyle:  FontStyle.normal,
+                    fontSize: 20.0
                 ),
                 textAlign: TextAlign.left,
               ),
-            )  
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-               Ink(
-                  width:90 ,
-                  height:110,
-                  decoration: BoxDecoration(
-                    //shape:BoxShape.circle,
-                    borderRadius: BorderRadius.circular(10.0)
+              TextButton(
+                onPressed:(){
+                },
+                child:const Text(
+                  '더보기',
+                  style: TextStyle(
+                      color: Color(0xff7b7b7b),
+                      fontWeight: FontWeight.w400,
+                      fontFamily:"AppleSDGothicNeo",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 10.0
                   ),
-                  child: InkWell(
-                    onTap:(){
-                      // Navigator.push(
-                      //   context, MaterialPageRoute(
-                      //     builder:(_) => ()
-                      //   )
-                      // );
-                    },
-                    child:Ink.image(
-                      image: AssetImage('assets/images/sticker4.jpeg'),
-                      
-                    ),
-                  ),
+                  textAlign: TextAlign.left,
                 ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Ink(
-                  width:90 ,
-                  height:110,
-                  decoration: BoxDecoration(
-                    shape:BoxShape.circle,
-                  ),
-                  child: InkWell(
-                    onTap:(){
-                      // Navigator.push(
-                      //   context, MaterialPageRoute(
-                      //     builder:(_) => ()
-                      //   )
-                      // );
-                    },
-                    child:Ink.image(
-                      image: AssetImage('assets/images/sticker5.jpeg'),
-                      
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Ink(
-                  width:90 ,
-                  height:110,
-                  decoration: BoxDecoration(
-                    shape:BoxShape.circle,
-                  ),
-                  child: InkWell(
-                    onTap:(){
-                      // Navigator.push(
-                      //   context, MaterialPageRoute(
-                      //     builder:(_) => ()
-                      //   )
-                      // );
-                    },
-                    child:Ink.image(
-                      image: AssetImage('assets/images/sticker6.jpeg'),
-                      
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    )
+              )
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                width:105,
+                height: 90,
+                child: Image.asset('assets/images/sticker4.jpeg', fit: BoxFit.fitHeight),
+              ),
+              Container(
+                width:105,
+                height: 90,
+                child: Image.asset('assets/images/sticker5.jpeg', fit: BoxFit.fitHeight),
+              ),
+              Container(
+                width:105,
+                height: 90,
+                child: Image.asset('assets/images/sticker6.jpeg', fit: BoxFit.fitHeight),
+              ),
+            ],
+          ),
+        ],
+      )
   );
 }  
 
 
 Widget _buildDeco(context){ // 이런 라이터는 어때요? 위젯
   return Container(
-    padding:const EdgeInsets.all(32),
-    child:Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:<Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              '깜찍뽀짝 데코 스티커',
-              style: TextStyle(
-                color:  const Color(0xff191919),
-                fontWeight: FontWeight.w400,
-                fontFamily: "NotoSansCJKKR",
-                fontStyle:  FontStyle.normal,
-                fontSize: 20.0
+      padding:const EdgeInsets.all(15),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:<Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              Text(
+                '깜찍뽀짝 데코 스티커',
+                style: TextStyle(
+                    color:  Color(0xff191919),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "NotoSansKR_Regular",
+                    fontStyle:  FontStyle.normal,
+                    fontSize: 20.0
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey, 
-                    
-                ),
-                Text(
-                    "곰돌곰돌이",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-                Text(
-                    "사랑스러운 곰돌이 스티커 모음",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 5.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: 155,
+                    height:180,
+                    color:Colors.grey,
 
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey
-                ),
-                Text(
-                    "토끼토땡이",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-                Text(
-                    "사실 난 곰이 아니라 토끼 ",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 5.0
-                    ),
-                    textAlign: TextAlign.left
-                )
-              ],
-            ),
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey, 
-                    
-                ),
-                Text(
-                    "곰돌곰돌이",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-                Text(
-                    "70년간 꼼꼼히 작성했던 가계부가 아",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 5.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-              ],
-            ),
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "곰돌곰돌이                         ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "사랑스러운 곰돌이 스티커 모음              \n아 귀엽다잉",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                      width: 155,
+                      height:180,
+                      color:Colors.grey
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "토끼토깽이                         ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "사실 난 곰이 아니라 토끼였어                \n토끼도 토끼대로 귀엽답니다 하하하",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: 155,
+                    height:180,
+                    color:Colors.grey,
 
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey
-                ),
-                Text(
-                    "토끼토깽이",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-                const Text(
-                    "제가 대학생이었을 때, 연애편지를 써준 친구들 중 잘 안된 ",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 5.0
-                    ),
-                    textAlign: TextAlign.left
-                )
-              ],
-            ), 
-          ],
-        ),
-      ],
-    )
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "곰돌곰돌이                         ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "사랑스러운 곰돌이 스티커 모음              \n아 귀엽다잉",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+
+              Column( //4번째 사진 위젯
+                children: <Widget>[
+                  Container(
+                      width: 155,
+                      height:180,
+                      color:Colors.grey
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "토끼토깽이                         ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "사실 난 곰이 아니라 토끼였어                \n토끼도 토끼대로 귀엽답니다 하하하",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      )
   );
 }  

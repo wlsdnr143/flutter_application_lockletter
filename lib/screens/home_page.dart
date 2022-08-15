@@ -18,6 +18,7 @@ import 'SelectLetter.dart';
 import 'SelectPerson_test.dart';
 import 'login_page.dart';
 import 'MarketWriter.dart';
+import 'package:cupertino_icons/cupertino_icons.dart';
 
 final imageList=[
   Image.asset('assets/images/banner1.jpeg',fit:BoxFit.cover),
@@ -174,22 +175,34 @@ class _HomePageState extends State<HomePage> {
             centerTitle: true,
             title: const Text(
               '잠긴편지',
-              style: TextStyle(color:Colors.black),
+              style: TextStyle(
+                  color:  Colors.black,
+                  fontWeight: FontWeight.w200,
+                  fontFamily: "SANGJU",
+              ),
             ),
             leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
-                  onPressed: () => googleSignOut(),
-                  color: Colors.black,
-                  icon: const Icon(Icons.logout)),
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(
+                      builder:(_) => SelectPerson_test())
+                  );
+                },
+                color: Colors.black,
+                icon: const Icon(Icons.local_post_office_outlined)),
+            // leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
+            //       onPressed: () => googleSignOut(),
+            //       color: Colors.black,
+            //       icon: const Icon(Icons.logout)),
             actions: [
               IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(
-                        builder:(_) => SelectPerson_test())
-                    );
-                  },
+                  onPressed: (){},
                   color: Colors.black,
-                  icon: const Icon(Icons.local_post_office_outlined)),
+                  icon: const Icon(Icons.add_reaction_outlined)),
+              // IconButton(
+              //     onPressed: (){},
+              //     color: Colors.black,
+              //     icon: const Icon(Icons.calendar_today_outlined)),
             ]),
       body:Container(
         child: ListView(
@@ -268,7 +281,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildSendLetter(context){ // 편지 보내기 버튼
     return Padding(
-      padding: const EdgeInsets.fromLTRB(17.0,0.0,17.0,0.0),
+      padding: const EdgeInsets.fromLTRB(10.0,0.0,10.0,0.0),
       child: Container(
         width:150,
         height:80,
@@ -291,9 +304,9 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       '잠긴편지 ',
                       style: TextStyle(
-                          fontFamily:"AppleSDGothicNeo",
-                          fontSize:17,
-                          fontWeight:FontWeight.w600,
+                          fontFamily:"BMO",
+                          fontSize:15,
+                          fontWeight:FontWeight.w400,
                           fontStyle: FontStyle.normal,
                           color: Colors.blue
                       ),
@@ -348,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       color:  const Color(0xff191919),
                       fontWeight: FontWeight.w600,
-                      fontFamily: "AppleSDGothicNeo",
+                      fontFamily: "NotoSansKR_Regular",
                       fontStyle:  FontStyle.normal,
                       fontSize: 22.0
                   ),
@@ -356,11 +369,11 @@ class _HomePageState extends State<HomePage> {
                 ),
                 TextButton(
                   onPressed:(){
-                    Navigator.push(
-                        context, MaterialPageRoute(
-                        builder:(_) => (Market())
-                    )
-                    );
+                    // Navigator.push(
+                    //     context, MaterialPageRoute(
+                    //     builder:(_) => (Market())
+                    // )
+                    // );
                   },
                   child:Text(
                     '더보기',
@@ -401,9 +414,9 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                             color:Color(0xff191919),
                             fontWeight: FontWeight.w300,
-                            fontFamily: "AppleSDGothicNeo",
+                            fontFamily: "SCDream3",
                             fontStyle:  FontStyle.normal,
-                            fontSize: 16.0
+                            fontSize: 15.0
                         ),
                         textAlign: TextAlign.left
                     )
@@ -430,9 +443,9 @@ class _HomePageState extends State<HomePage> {
                         style: TextStyle(
                             color:Color(0xff191919),
                             fontWeight: FontWeight.w300,
-                            fontFamily: "AppleSDGothicNeo",
+                            fontFamily: "SCDream3",
                             fontStyle:  FontStyle.normal,
-                            fontSize: 16.0
+                            fontSize: 15.0
                         ),
                         textAlign: TextAlign.left
                     )
@@ -455,13 +468,13 @@ class _HomePageState extends State<HomePage> {
                         )
                     ),
                     Text(
-                        "스티커                ",
+                        "스티커            ",
                         style: TextStyle(
                             color:Color(0xff191919),
                             fontWeight: FontWeight.w300,
-                            fontFamily: "AppleSDGothicNeo",
+                            fontFamily: "SCDream3",
                             fontStyle:  FontStyle.normal,
-                            fontSize: 16.0
+                            fontSize: 15.0
                         ),
                         textAlign: TextAlign.left
                     ),
@@ -488,7 +501,7 @@ class _HomePageState extends State<HomePage> {
                       style: TextStyle(
                           color:  const Color(0xff191919),
                           fontWeight: FontWeight.w600,
-                          fontFamily: "AppleSDGothicNeo",
+                          fontFamily: "NotoSansKR_Regular",
                           fontStyle:  FontStyle.normal,
                           fontSize: 22.0
                       ),
@@ -542,12 +555,23 @@ class _HomePageState extends State<HomePage> {
                                 child:Column(
                                   children: const [
                                     Text(
-                                        "From. 채원",
+                                        "2021.01.01",
+                                        textAlign: TextAlign.left,
                                         style:TextStyle(
                                             color:Color(0xff000000),
-                                            fontSize: 15.0,
+                                            fontSize: 14.0,
                                             fontWeight: FontWeight.w400,
-                                            fontFamily: "SeoulNamsanC-M",
+                                            fontFamily: "SeoulNamsanEB",
+                                            fontStyle: FontStyle.normal
+                                        )
+                                    ),
+                                    Text(
+                                        "From. 채원  ",
+                                        style:TextStyle(
+                                            color:Color(0xff000000),
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "SeoulNamsanM",
                                             fontStyle: FontStyle.normal
                                         )
                                     ),
@@ -555,29 +579,47 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Text(
-                                  'D-365'
-                              ),
-                              Container(
-                                  child:Column(
-                                    crossAxisAlignment:CrossAxisAlignment.end,
-                                    children: const [
-                                      Text(
-                                          '받은날: 21.01.01',
-                                          style:TextStyle(
-                                              color:Color(0xff767676),
-                                              fontSize:8.0
-                                          )
-                                      ),
-                                      Text(
-                                          '개봉일: 22.02.25',
-                                          style:TextStyle(
-                                              color:Color(0xff767676),
-                                              fontSize:8.0
-                                          )
-                                      )
-                                    ],
+                                  '너는 이 편지를 1년 뒤에 읽겠지?',
+                                  style:TextStyle(
+                                      color:Colors.black45,
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "SeoulNamsanM",
+                                      fontStyle: FontStyle.normal
                                   )
-                              )
+
+                              ),
+                              Text(
+                                  'D-365     ',
+                                  style:TextStyle(
+                                      color:Color(0xff767676),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "SeoulNamsanM",
+                                      fontStyle: FontStyle.normal
+                                  )
+                              ),
+                              // Container(
+                              //     child:Column(
+                              //       crossAxisAlignment:CrossAxisAlignment.end,
+                              //       children: const [
+                              //         Text(
+                              //             '받은날: 21.01.01',
+                              //             style:TextStyle(
+                              //                 color:Color(0xff767676),
+                              //                 fontSize:8.0
+                              //             )
+                              //         ),
+                              //         Text(
+                              //             '개봉일: 22.02.25',
+                              //             style:TextStyle(
+                              //                 color:Color(0xff767676),
+                              //                 fontSize:8.0
+                              //             )
+                              //         )
+                              //       ],
+                              //     )
+                              // )
                             ]
                         )
                     ),
@@ -586,7 +628,8 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(5),
                         decoration:BoxDecoration(
                           borderRadius: BorderRadius.circular(0.0),
-                            color: Color(0xfff1f1f5)
+                          color: Color(0xfff1f1f5),
+                          //color: Color(0xfff1f1f5),
                         ),
                         child:Row(
                             mainAxisAlignment:MainAxisAlignment.spaceBetween,
@@ -600,42 +643,75 @@ class _HomePageState extends State<HomePage> {
                                       )
                                   )
                               ),
-                              Column(
-                                children: const [
-                                  Text(
-                                      "From. 혜린",
-                                      style:TextStyle(
-                                          color:Color(0xff000000),
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: "SeoulNamsanC-M",
-                                          fontStyle: FontStyle.normal
-                                      )
-                                  ),
-                                ],
+                              Container(
+                                child:Column(
+                                  children: const [
+                                    Text(
+                                        "2021.01.01",
+                                        textAlign: TextAlign.left,
+                                        style:TextStyle(
+                                            color:Color(0xff000000),
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "SeoulNamsanEB",
+                                            fontStyle: FontStyle.normal
+                                        )
+                                    ),
+                                    Text(
+                                        "From. 도진  ",
+                                        style:TextStyle(
+                                            color:Color(0xff000000),
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "SeoulNamsanM",
+                                            fontStyle: FontStyle.normal
+                                        )
+                                    ),
+                                  ],
+                                ),
                               ),
                               Text(
-                                  'D-365'
-                              ),
-                              Column(
-                                crossAxisAlignment:CrossAxisAlignment.end,
-                                children: const [
-                                  Text(
-                                      '받은날: 21.01.01',
-                                      style:TextStyle(
-                                          color:Color(0xff767676),
-                                          fontSize:8.0
-                                      )
-                                  ),
-                                  Text(
-                                      '개봉일: 22.02.25',
-                                      style:TextStyle(
-                                          color:Color(0xff767676),
-                                          fontSize:8.0
-                                      )
+                                  '너는 이 편지를 1년 뒤에 읽겠지?',
+                                  style:TextStyle(
+                                      color:Colors.black45,
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "SeoulNamsanM",
+                                      fontStyle: FontStyle.normal
                                   )
-                                ],
-                              )
+
+                              ),
+                              Text(
+                                  'D-365     ',
+                                  style:TextStyle(
+                                      color:Color(0xff767676),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "SeoulNamsanM",
+                                      fontStyle: FontStyle.normal
+                                  )
+                              ),
+                              // Container(
+                              //     child:Column(
+                              //       crossAxisAlignment:CrossAxisAlignment.end,
+                              //       children: const [
+                              //         Text(
+                              //             '받은날: 21.01.01',
+                              //             style:TextStyle(
+                              //                 color:Color(0xff767676),
+                              //                 fontSize:8.0
+                              //             )
+                              //         ),
+                              //         Text(
+                              //             '개봉일: 22.02.25',
+                              //             style:TextStyle(
+                              //                 color:Color(0xff767676),
+                              //                 fontSize:8.0
+                              //             )
+                              //         )
+                              //       ],
+                              //     )
+                              // )
                             ]
                         )
                     ),
@@ -644,7 +720,8 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(5),
                         decoration:BoxDecoration(
                           borderRadius: BorderRadius.circular(0.0),
-                            color: Color(0xfff1f1f5)
+                          color: Color(0xfff1f1f5),
+                          //color: Color(0xfff1f1f5),
                         ),
                         child:Row(
                             mainAxisAlignment:MainAxisAlignment.spaceBetween,
@@ -658,44 +735,75 @@ class _HomePageState extends State<HomePage> {
                                       )
                                   )
                               ),
-                              Column(
-                                children: const [
-                                  Text(
-                                      "From. 도진",
-                                      style:TextStyle(
-                                          color:Color(0xff000000),
-                                          fontSize: 15.0,
-                                          fontWeight: FontWeight.w400,
-                                          fontFamily: "SeoulNamsanC-M",
-                                          fontStyle: FontStyle.normal
-                                      )
-                                  ),
-                                ],
+                              Container(
+                                child:Column(
+                                  children: const [
+                                    Text(
+                                        "2021.01.01",
+                                        textAlign: TextAlign.left,
+                                        style:TextStyle(
+                                            color:Color(0xff000000),
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "SeoulNamsanEB",
+                                            fontStyle: FontStyle.normal
+                                        )
+                                    ),
+                                    Text(
+                                        "From. 혜린  ",
+                                        style:TextStyle(
+                                            color:Color(0xff000000),
+                                            fontSize: 12.0,
+                                            fontWeight: FontWeight.w400,
+                                            fontFamily: "SeoulNamsanM",
+                                            fontStyle: FontStyle.normal
+                                        )
+                                    ),
+                                  ],
+                                ),
                               ),
                               Text(
-                                  'D-365'
-                              ),
-                              Container(
-                                  child:Column(
-                                    crossAxisAlignment:CrossAxisAlignment.end,
-                                    children: const [
-                                      Text(
-                                          '받은날: 21.01.01',
-                                          style:TextStyle(
-                                              color:Color(0xff767676),
-                                              fontSize:8.0
-                                          )
-                                      ),
-                                      Text(
-                                          '개봉일: 22.02.25',
-                                          style:TextStyle(
-                                              color:Color(0xff767676),
-                                              fontSize:8.0
-                                          )
-                                      )
-                                    ],
+                                  '너는 이 편지를 1년 뒤에 읽겠지?',
+                                  style:TextStyle(
+                                      color:Colors.black45,
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "SeoulNamsanM",
+                                      fontStyle: FontStyle.normal
                                   )
-                              )
+
+                              ),
+                              Text(
+                                  'D-365     ',
+                                  style:TextStyle(
+                                      color:Color(0xff767676),
+                                      fontSize: 10.0,
+                                      fontWeight: FontWeight.w400,
+                                      fontFamily: "SeoulNamsanM",
+                                      fontStyle: FontStyle.normal
+                                  )
+                              ),
+                              // Container(
+                              //     child:Column(
+                              //       crossAxisAlignment:CrossAxisAlignment.end,
+                              //       children: const [
+                              //         Text(
+                              //             '받은날: 21.01.01',
+                              //             style:TextStyle(
+                              //                 color:Color(0xff767676),
+                              //                 fontSize:8.0
+                              //             )
+                              //         ),
+                              //         Text(
+                              //             '개봉일: 22.02.25',
+                              //             style:TextStyle(
+                              //                 color:Color(0xff767676),
+                              //                 fontSize:8.0
+                              //             )
+                              //         )
+                              //       ],
+                              //     )
+                              // )
                             ]
                         )
                     ),
@@ -709,7 +817,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildWriter(context) { // 이런 라이터는 어때요 위젯
 
     return Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(5.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -721,7 +829,7 @@ class _HomePageState extends State<HomePage> {
                   style: TextStyle(
                       color: Color(0xff191919),
                       fontWeight: FontWeight.w600,
-                      fontFamily: "AppleSDGothicNeo",
+                      fontFamily: "NotoSansKR_Regular",
                       fontStyle: FontStyle.normal,
                       fontSize: 22.0
                   ),
@@ -735,28 +843,32 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    InkWell(
-                        //onTap:(){
-                        //  Navigator.push(
-                        //      context, MaterialPageRoute(
-                        //      builder:(_) => (MarketLetter())
-                        //  )
-                        //  );
-                        //},
-                        child:Ink.image(
-                          image: AssetImage('assets/images/handwrite.jpeg'),
-                          width:160,
-                          height:160,
-                        )
+                    Container(
+                      width:170,
+                      height: 120,
+                      child: Image.asset('assets/images/handwrite.jpeg', fit: BoxFit.fitWidth),
                     ),
+                    SizedBox(height:5),
                     Text(
-                        "유범체                        ",
+                        "유범체                       ",
                         style: TextStyle(
                             color: Color(0xff191919),
                             fontWeight: FontWeight.w300,
-                            fontFamily: "AppleSDGothicNeo",
+                            fontFamily: "SCDream4",
                             fontStyle: FontStyle.normal,
                             fontSize: 18.0
+                        ),
+                        textAlign: TextAlign.left
+                    ),
+                    SizedBox(height:5),
+                    Text(
+                        "70년간 꼼꼼히 작성했던 가계부가 아이들   \n사이에서 화제가 된적이 있었죠",
+                        style: TextStyle(
+                            color: Color(0xff656565),
+                            fontWeight: FontWeight.w300,
+                            fontFamily: "SCDream4",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 9.0
                         ),
                         textAlign: TextAlign.left
                     ),
@@ -764,28 +876,32 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Column(
                   children: <Widget>[
-                    InkWell(
-                        //onTap:(){
-                        //  Navigator.push(
-                        //      context, MaterialPageRoute(
-                        //      builder:(_) => (MarketLetter())
-                        //  )
-                        //  );
-                        //},
-                        child:Ink.image(
-                          image: AssetImage('assets/images/handwrite.jpeg'),
-                          width:160,
-                          height:160,
-                        )
+                    Container(
+                      width:170,
+                      height: 120,
+                      child: Image.asset('assets/images/handwrite.jpeg', fit: BoxFit.fitWidth),
                     ),
+                    SizedBox(height:5),
                     Text(
-                        "미리내체                     ",
+                        "미리내체                    ",
                         style: TextStyle(
                             color: Color(0xff191919),
                             fontWeight: FontWeight.w500,
-                            fontFamily: "AppleSDGothicNeo",
+                            fontFamily: "SCDream4",
                             fontStyle: FontStyle.normal,
                             fontSize: 18.0
+                        ),
+                        textAlign: TextAlign.left
+                    ),
+                    SizedBox(height:5),
+                    Text(
+                        "70년간 꼼꼼히 작성했던 가계부가 아이들   \n사이에서 화제가 된적이 있었죠",
+                        style: TextStyle(
+                            color: Color(0xff656565),
+                            fontWeight: FontWeight.w300,
+                            fontFamily: "SCDream4",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 9.0
                         ),
                         textAlign: TextAlign.left
                     ),
@@ -799,42 +915,35 @@ class _HomePageState extends State<HomePage> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    InkWell(
-                        //onTap:(){
-                        //  Navigator.push(
-                        //      context, MaterialPageRoute(
-                        //     builder:(_) => (MarketLetter())
-                        //  )
-                        //  );
-                        //},
-                        child:Ink.image(
-                          image: AssetImage('assets/images/handwrite.jpeg'),
-                          width:160,
-                          height:160,
-                        )
+                    Container(
+                      width:170,
+                      height: 120,
+                      child: Image.asset('assets/images/handwrite.jpeg', fit: BoxFit.fitWidth),
                     ),
+                    SizedBox(height:5),
                     Text(
-                        "승은체                        ",
+                        "승은체                       ",
                         style: TextStyle(
                             color: Color(0xff191919),
                             fontWeight: FontWeight.w300,
-                            fontFamily: "AppleSDGothicNeo",
+                            fontFamily: "SCDream4",
                             fontStyle: FontStyle.normal,
                             fontSize: 18.0
                         ),
                         textAlign: TextAlign.left
                     ),
-                    // Text(
-                    //     "70년간 꼼꼼히 작성했던 가계부가 아이들 사이에서 화제가 된적이 있었죠",
-                    //     style: TextStyle(
-                    //         color: Color(0xff191919),
-                    //         fontWeight: FontWeight.w300,
-                    //         fontFamily: "S-CoreDream-3",
-                    //         fontStyle: FontStyle.normal,
-                    //         fontSize: 5.0
-                    //     ),
-                    //     textAlign: TextAlign.left
-                    // ),
+                    SizedBox(height:5),
+                    Text(
+                        "70년간 꼼꼼히 작성했던 가계부가 아이들   \n사이에서 화제가 된적이 있었죠",
+                        style: TextStyle(
+                            color: Color(0xff656565),
+                            fontWeight: FontWeight.w300,
+                            fontFamily: "SCDream4",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 9.0
+                        ),
+                        textAlign: TextAlign.left
+                    ),
                   ],
                 ),
 
@@ -850,8 +959,8 @@ class _HomePageState extends State<HomePage> {
                         // },
                         child:Ink.image(
                           image: AssetImage('assets/images/'),
-                          width:160,
-                          height:160,
+                          width:170,
+                          height:120,
                         )
                     ),
                     Text(
@@ -872,7 +981,7 @@ class _HomePageState extends State<HomePage> {
                             fontWeight: FontWeight.w300,
                             fontFamily: "AppleSDGothicNeo",
                             fontStyle: FontStyle.normal,
-                            fontSize: 5.0
+                            fontSize: 6.0
                         ),
                         textAlign: TextAlign.left
                     )

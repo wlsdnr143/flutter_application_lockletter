@@ -88,19 +88,20 @@ Widget _buildSliderBar(){ // 맨 위 슬라이드 위젯
 
 Widget _buildFamily(context){ // 오늘의 마켓 위젯
   return Container(
-    padding:const EdgeInsets.all(32),
+    padding:const EdgeInsets.all(15),
     child:Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:<Widget>[
+        SizedBox(height:20),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              '오늘의 글씨체',
+              '오늘의 라이터',
               style: TextStyle(
                 color:  Color(0xff191919),
-                fontWeight: FontWeight.w400,
-                fontFamily: "AppleSDGothicNeo",
+                fontWeight: FontWeight.w600,
+                fontFamily: "NotoSansKR_Regular",
                 fontStyle:  FontStyle.normal,
                 fontSize: 20.0
               ),
@@ -127,59 +128,20 @@ Widget _buildFamily(context){ // 오늘의 마켓 위젯
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                InkWell(
-                  onTap:(){
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder:(_) => (Market())
-                    //   )
-                    // );
-                  },
-                  child:Ink.image(
-                    image: AssetImage('assets/images/hand5.jpeg'),
-                    width:90,
-                    height:110,
-                  )
-                )
-              ],
+            Container(
+              width:105,
+              height: 90,
+              child: Image.asset('assets/images/hand5.jpeg', fit: BoxFit.fitHeight),
             ),
-            Column(
-              children: <Widget>[
-                InkWell(
-                  onTap:(){
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder:(_) => (Market())
-                    //   )
-                    //);
-                  },
-                  child:Ink.image(
-                    image: AssetImage('assets/images/hand6.jpeg'),
-                    width:90,
-                    height:110,
-                  )
-                ),
-              ],
+            Container(
+              width:105,
+              height: 90,
+              child: Image.asset('assets/images/hand6.jpeg', fit: BoxFit.fitHeight),
             ),
-            Column(
-              children: <Widget>[
-                InkWell(
-                  onTap:(){
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder:(_) => (Market())
-                    //   )
-                    // );
-                  },
-                  child:Ink.image(
-                    image: AssetImage('assets/images/hand7.jpeg'),
-                    width:90,
-                    height:110,
-                  )
-                ),
-              ],
+            Container(
+              width:105,
+              height: 90,
+              child: Image.asset('assets/images/hand7.jpeg', fit: BoxFit.fitHeight),
             ),
           ],
         ),
@@ -191,7 +153,7 @@ Widget _buildFamily(context){ // 오늘의 마켓 위젯
 
 Widget _buildWant(context){ // 이런 라이터는 어때요? 위젯
   return Container(
-    padding:const EdgeInsets.all(32),
+    padding:const EdgeInsets.all(15),
     child:Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children:<Widget>[
@@ -202,8 +164,8 @@ Widget _buildWant(context){ // 이런 라이터는 어때요? 위젯
               '감성가득 필체 여기 다 있다',
               style: TextStyle(
                 color:  Color(0xff191919),
-                fontWeight: FontWeight.w400,
-                fontFamily: "NotoSansCJKKR",
+                fontWeight: FontWeight.w600,
+                fontFamily: "NotoSansKR_Regular",
                 fontStyle:  FontStyle.normal,
                 fontSize: 20.0
               ),
@@ -218,13 +180,14 @@ Widget _buildWant(context){ // 이런 라이터는 어때요? 위젯
             Column(
               children: <Widget>[
                 Container(
-                    width: 130,
-                    height:150,
+                    width: 160,
+                    height:130,
                     color:Colors.grey, 
                     
                 ),
+                SizedBox(height:5),
                 const Text(
-                    "유범체",
+                    "유범체                                 ",
                     style: TextStyle(
                         color:Color(0xff191919),
                         fontWeight: FontWeight.w300,
@@ -234,23 +197,48 @@ Widget _buildWant(context){ // 이런 라이터는 어때요? 위젯
                     ),
                     textAlign: TextAlign.left
                 ),
+                SizedBox(height:3),
+                Text(
+                    "70년간 꼼꼼히 작성했던 가계부가 아이들\n사이에서 화제가 된적이 있었죠",
+                    style: TextStyle(
+                        color: Color(0xff656565),
+                        fontWeight: FontWeight.w300,
+                        fontFamily: "SCDream4",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 9.0
+                    ),
+                    textAlign: TextAlign.left
+                ),
               ],
             ),
             Column(
               children: <Widget>[
                 Container(
-                    width: 130,
-                    height:150,
+                    width: 160,
+                    height:130,
                     color:Colors.grey
                 ),
+                SizedBox(height:5),
                 const Text(
-                    "미리내체",
+                    "미리내체                             ",
                     style: TextStyle(
                         color:Color(0xff191919),
                         fontWeight: FontWeight.w300,
                         fontFamily: "S-CoreDream-3",
                         fontStyle:  FontStyle.normal,
                         fontSize: 15.0
+                    ),
+                    textAlign: TextAlign.left
+                ),
+                SizedBox(height:3),
+                Text(
+                    "70년간 꼼꼼히 작성했던 가계부가 아이들\n사이에서 화제가 된적이 있었죠",
+                    style: TextStyle(
+                        color: Color(0xff656565),
+                        fontWeight: FontWeight.w300,
+                        fontFamily: "SCDream4",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 9.0
                     ),
                     textAlign: TextAlign.left
                 ),
@@ -265,45 +253,69 @@ Widget _buildWant(context){ // 이런 라이터는 어때요? 위젯
             Column(
               children: <Widget>[
                 Container(
-                    width: 130,
-                    height:150,
+                  width: 160,
+                  height:130,
                     color:Colors.grey, 
                     
                 ),
+                SizedBox(height:5),
                 const Text(
-                    "승은체",
+                    "승은체                                 ",
                     style: TextStyle(
                         color:Color(0xff191919),
                         fontWeight: FontWeight.w300,
                         fontFamily: "S-CoreDream-3",
                         fontStyle:  FontStyle.normal,
                         fontSize: 15.0
+                    ),
+                    textAlign: TextAlign.left
+                ),
+                SizedBox(height:3),
+                const Text(
+                    "70년간 꼼꼼히 작성했던 가계부가 아이들\n사이에서 화제가 된적이 있었죠",
+                    style: TextStyle(
+                        color: Color(0xff656565),
+                        fontWeight: FontWeight.w300,
+                        fontFamily: "SCDream4",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 9.0
                     ),
                     textAlign: TextAlign.left
                 ),
               ],
             ),
 
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey
-                ),
-                const Text(
-                    "",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "S-CoreDream-3",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-              ],
-            ), 
+            // Column( //4번째 사진 위젯
+            //   children: <Widget>[
+            //     Container(
+            //         width: 160,
+            //         height:130,
+            //         color:Colors.grey
+            //     ),
+            //     const Text(
+            //         "",
+            //         style: TextStyle(
+            //             color:Color(0xff191919),
+            //             fontWeight: FontWeight.w300,
+            //             fontFamily: "S-CoreDream-3",
+            //             fontStyle:  FontStyle.normal,
+            //             fontSize: 15.0
+            //         ),
+            //         textAlign: TextAlign.left
+            //     ),
+            //     Text(
+            //         "",
+            //         style: TextStyle(
+            //             color: Color(0xff656565),
+            //             fontWeight: FontWeight.w300,
+            //             fontFamily: "SCDream4",
+            //             fontStyle: FontStyle.normal,
+            //             fontSize: 9.0
+            //         ),
+            //         textAlign: TextAlign.left
+            //     ),
+            //   ],
+            // ),
           ],
         ),
       ],

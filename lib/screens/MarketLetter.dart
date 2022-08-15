@@ -88,237 +88,239 @@ Widget _buildSliderBar(){ // 맨 위 슬라이드 위젯
 
 Widget _buildFamily(context){ // 오늘의 마켓 위젯
   return Container(
-    padding:const EdgeInsets.all(32),
-    child:Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:<Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            const Text(
-              '가정의 달엔 편지 한 통',
-              style: TextStyle(
-                color:  Color(0xff191919),
-                fontWeight: FontWeight.w400,
-                fontFamily: "AppleSDGothicNeo",
-                fontStyle:  FontStyle.normal,
-                fontSize: 20.0
-              ),
-              textAlign: TextAlign.left,
-            ),
-            TextButton(
-              onPressed:(){
-              },
-              child:const Text(
-                '더보기',
+      padding:const EdgeInsets.all(15),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:<Widget>[
+          SizedBox(height:20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                '가정의 달엔 편지 한 통',
                 style: TextStyle(
-                  color: Color(0xff7b7b7b),
-                  fontWeight: FontWeight.w400,
-                  fontFamily:"AppleSDGothicNeo",
-                  fontStyle: FontStyle.normal,
-                  fontSize: 10.0
+                    color:  Color(0xff191919),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "NotoSansKR_Regular",
+                    fontStyle:  FontStyle.normal,
+                    fontSize: 20.0
                 ),
                 textAlign: TextAlign.left,
               ),
-            )  
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                InkWell(
-                  onTap:(){
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder:(_) => (Market())
-                    //   )
-                    // );
-                  },
-                  child:Ink.image(
-                    image: AssetImage('assets/images/letter6.jpeg'),
-                    width:90,
-                    height:110,
-                  )
-                )
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                InkWell(
-                  onTap:(){
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder:(_) => (Market())
-                    //   )
-                    //);
-                  },
-                  child:Ink.image(
-                    image: AssetImage('assets/images/letter9.jpeg'),
-                    width:90,
-                    height:110,
-                  )
+              TextButton(
+                onPressed:(){
+                },
+                child:const Text(
+                  '더보기',
+                  style: TextStyle(
+                      color: Color(0xff7b7b7b),
+                      fontWeight: FontWeight.w400,
+                      fontFamily:"AppleSDGothicNeo",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 10.0
+                  ),
+                  textAlign: TextAlign.left,
                 ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                InkWell(
-                  onTap:(){
-                    // Navigator.push(
-                    //   context, MaterialPageRoute(
-                    //     builder:(_) => (Market())
-                    //   )
-                    // );
-                  },
-                  child:Ink.image(
-                    image: AssetImage('assets/images/letter8.jpeg'),
-                    width:90,
-                    height:110,
-                  )
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    )
+              )
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                width:105,
+                height: 90,
+                child: Image.asset('assets/images/letter6.jpeg', fit: BoxFit.fitHeight),
+              ),
+              Container(
+                width:105,
+                height: 90,
+                child: Image.asset('assets/images/letter9.jpeg', fit: BoxFit.fitHeight),
+              ),
+              Container(
+                width:105,
+                height: 90,
+                child: Image.asset('assets/images/letter8.jpeg', fit: BoxFit.fitHeight),
+              ),
+            ],
+          ),
+        ],
+      )
   );
 }  
 
 
 Widget _buildWant(context){ // 이런 라이터는 어때요? 위젯
   return Container(
-    padding:const EdgeInsets.all(32),
-    child:Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children:<Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            Text(
-              '소장욕구 자극하는 편지지',
-              style: TextStyle(
-                color:  Color(0xff191919),
-                fontWeight: FontWeight.w400,
-                fontFamily: "AppleSDGothicNeo",
-                fontStyle:  FontStyle.normal,
-                fontSize: 20.0
+      padding:const EdgeInsets.all(15),
+      child:Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children:<Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: const [
+              Text(
+                '소장욕구 자극하는 편지지',
+                style: TextStyle(
+                    color:  Color(0xff191919),
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "NotoSansKR_Regular",
+                    fontStyle:  FontStyle.normal,
+                    fontSize: 20.0
+                ),
+                textAlign: TextAlign.left,
               ),
-              textAlign: TextAlign.left,
-            ),
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey, 
-                    
-                ),
-                const Text(
-                    "꽃무늬 편지지",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey
-                ),
-                const Text(
-                    "땡땡이편지지",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment:MainAxisAlignment.spaceBetween ,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey, 
-                    
-                ),
-                const Text(
-                    "알록달록편지지",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
-                // const Text(
-                //     "70년간 꼼꼼히 작성했던 가계부가 아이들 사이에서 화제가 된적이 있었죠",
-                //     style: TextStyle(
-                //         color:Color(0xff191919),
-                //         fontWeight: FontWeight.w300,
-                //         fontFamily: "S-CoreDream-3",
-                //         fontStyle:  FontStyle.normal,
-                //         fontSize: 5.0
-                //     ),
-                //     textAlign: TextAlign.left
-                // ),
-              ],
-            ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: 155,
+                    height:180,
+                    color:Colors.grey,
 
-            Column(
-              children: <Widget>[
-                Container(
-                    width: 130,
-                    height:150,
-                    color:Colors.grey
-                ),
-                const Text(
-                    "크라프트편지지",
-                    style: TextStyle(
-                        color:Color(0xff191919),
-                        fontWeight: FontWeight.w300,
-                        fontFamily: "AppleSDGothicNeo",
-                        fontStyle:  FontStyle.normal,
-                        fontSize: 15.0
-                    ),
-                    textAlign: TextAlign.left
-                ),
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "꽃무늬 편지지                    ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "꽃무늬도 세련될 수 있다구요                \n진짜루",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Container(
+                      width: 155,
+                      height:180,
+                      color:Colors.grey
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "땡땡이 편지지                     ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "물방울 무늬를 말하는 게 아닙니다          \n제가 땡땡이를 치고 싶다는 뜻입니다...",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment:MainAxisAlignment.spaceBetween ,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Container(
+                    width: 155,
+                    height:180,
+                    color:Colors.grey,
 
-              ],
-            ),
-          ],
-        ),
-      ],
-    )
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "꽃무늬 편지지                    ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "꽃무늬도 세련될 수 있다구요                \n진짜루",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+
+              Column( //4번째 사진 위젯
+                children: <Widget>[
+                  Container(
+                      width: 155,
+                      height:180,
+                      color:Colors.grey
+                  ),
+                  SizedBox(height:5),
+                  const Text(
+                      "땡땡이 편지지                     ",
+                      style: TextStyle(
+                          color:Color(0xff191919),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "S-CoreDream-3",
+                          fontStyle:  FontStyle.normal,
+                          fontSize: 15.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                  SizedBox(height:3),
+                  Text(
+                      "물방울 무늬를 말하는 게 아닙니다          \n제가 땡땡이를 치고 싶다는 뜻입니다...",
+                      style: TextStyle(
+                          color: Color(0xff656565),
+                          fontWeight: FontWeight.w300,
+                          fontFamily: "SCDream4",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 9.0
+                      ),
+                      textAlign: TextAlign.left
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      )
   );
 }  

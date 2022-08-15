@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'SelectPerson_test.dart';
 import 'WriteLetter.dart';
 
 class LetterBottle extends StatelessWidget {
@@ -13,10 +14,32 @@ class LetterBottle extends StatelessWidget {
             elevation:0.0,
             centerTitle: true,
             title: const Text(
-              '나에게 쓰는 편지',
+              '잠긴편지',
               style: TextStyle(color:Colors.black),
             ),
-        ),
+            leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
+                onPressed: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(
+                      builder:(_) => SelectPerson_test())
+                  );
+                },
+                color: Colors.black,
+                icon: const Icon(Icons.local_post_office_outlined)),
+            // leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
+            //       onPressed: () => googleSignOut(),
+            //       color: Colors.black,
+            //       icon: const Icon(Icons.logout)),
+            actions: [
+              IconButton(
+                  onPressed: (){},
+                  color: Colors.black,
+                  icon: const Icon(Icons.add_reaction_outlined)),
+              // IconButton(
+              //     onPressed: (){},
+              //     color: Colors.black,
+              //     icon: const Icon(Icons.calendar_today_outlined)),
+            ]),
         body: Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 40.0, 0.0, 0.0),
             child: Column(children: <Widget>[
@@ -40,7 +63,7 @@ class LetterBottle extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
-                          fontFamily: 'AppleSDGothicNeo'),
+                          fontFamily: 'Kyobo_Handwriting_2019'),
                     )),
               ),
               const SizedBox(height: 50),
