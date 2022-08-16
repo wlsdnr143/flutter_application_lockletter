@@ -132,17 +132,17 @@ Widget _buildCutie(context){ // 오늘의 마켓 위젯
               Container(
                 width:105,
                 height: 90,
-                child: Image.asset('assets/images/sticker4.jpeg', fit: BoxFit.fitHeight),
+                child: Image.asset('assets/images/sticker4.jpeg', fit: BoxFit.fitWidth),
               ),
               Container(
                 width:105,
                 height: 90,
-                child: Image.asset('assets/images/sticker5.jpeg', fit: BoxFit.fitHeight),
+                child: Image.asset('assets/images/sticker5.jpeg', fit: BoxFit.fitWidth),
               ),
               Container(
                 width:105,
                 height: 90,
-                child: Image.asset('assets/images/sticker6.jpeg', fit: BoxFit.fitHeight),
+                child: Image.asset('assets/images/sticker6.jpeg', fit: BoxFit.fitWidth),
               ),
             ],
           ),

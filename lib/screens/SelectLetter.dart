@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 // import 'SelectRelease.dart';
-import 'PostBox.dart';
 import 'SelectRelease.dart';
 import 'findFriend_TosendLetter.dart';
 

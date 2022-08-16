@@ -1,4 +1,5 @@
 //ignore_for_file:prefer_const_constructors
+
 import 'dart:async';
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,7 +12,6 @@ import '../allConstants/text_field_constants.dart';
 import '../providers/auth_provider.dart';
 import '../providers/home_provider.dart';
 import '../utilities/debouncer.dart';
-import 'Market.dart';
 import 'MarketLetter.dart';
 import 'MarketSticker.dart';
 import 'SelectLetter.dart';
@@ -176,33 +176,35 @@ class _HomePageState extends State<HomePage> {
             title: const Text(
               '잠긴편지',
               style: TextStyle(
+                fontSize: 18,
                   color:  Colors.black,
-                  fontWeight: FontWeight.w200,
+                  fontWeight: FontWeight.normal,
                   fontFamily: "SANGJU",
               ),
             ),
-            leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(
-                      builder:(_) => SelectPerson_test())
-                  );
-                },
-                color: Colors.black,
-                icon: const Icon(Icons.local_post_office_outlined)),
             // leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
-            //       onPressed: () => googleSignOut(),
-            //       color: Colors.black,
-            //       icon: const Icon(Icons.logout)),
+            //     onPressed: () {
+            //       Navigator.push(
+            //           context, MaterialPageRoute(
+            //           builder:(_) => SelectPerson_test())
+            //       );
+            //     },
+            //     color: Colors.black,
+            //     icon: const Icon(Icons.local_post_office_outlined)),
+            leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
+                  onPressed: () => googleSignOut(),
+                  color: Colors.black,
+                  icon: const Icon(Icons.logout)),
             actions: [
               IconButton(
                   onPressed: (){},
                   color: Colors.black,
+                  icon: const Icon(Icons.calendar_today_outlined)),
+              IconButton(
+                  onPressed: (){},
+                  color: Colors.black,
                   icon: const Icon(Icons.add_reaction_outlined)),
-              // IconButton(
-              //     onPressed: (){},
-              //     color: Colors.black,
-              //     icon: const Icon(Icons.calendar_today_outlined)),
+
             ]),
       body:Container(
         child: ListView(

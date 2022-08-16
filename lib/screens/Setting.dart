@@ -23,37 +23,61 @@ class Setting extends StatelessWidget {
               child: Column(
                   children: <Widget>[
                     ListTile(
-                        title : Text('고객센터', style: TextStyle(color: Colors.black54)),
+                        title : Text('고객센터', style: TextStyle(color: Colors.black54,
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",),),
                     ),
                     SizedBox(height: 5),
                     ListTile(
-                      title : Text('FAQ'),
+                      title : Text('FAQ',
+                        style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",
+                        ),),
                       onTap: (){}
                         ),
                     ListTile(
-                        title : Text('개인정보수집 안내'),
+                        title : Text('개인정보수집 안내',style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",
+                        ),
+                        ),
                         onTap: (){}
                     ),
                     ListTile(
-                        title : Text('앱 문의'),
+                        title : Text('앱 문의',style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",
+                        ),),
                         onTap: (){}
                     ),
                     ListTile(
-                        title : Text('문의 내역'),
+                        title : Text('문의 내역',style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",
+                        ),),
                         onTap: (){}
                     ),
                     SizedBox(height:30),
                     ListTile(
                       title: Text('설정',
-                      style: TextStyle(color:Colors.black54)),
+                      style: TextStyle(color:Colors.black54,fontWeight: FontWeight.normal,
+                        fontFamily: "NotoSansKR_Regular",),
+                      ),
                     ),
                     SizedBox(height:5),
                     ListTile(
-                        title : Text('설정'),
+                        title : Text('설정',style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",
+                        ),),
                         onTap: (){}
                     ),
                     ListTile(
-                        title : Text('앱 버전'),
+                        title : Text('앱 버전',style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontFamily: "NotoSansKR_Regular",
+                        ),),
                         onTap: (){}
                     ),
               ])

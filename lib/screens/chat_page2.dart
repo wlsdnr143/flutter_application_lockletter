@@ -7,16 +7,13 @@ import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../allConstants/color_constants.dart';
 import '../allConstants/firestore_constants.dart';
 import '../allConstants/size_constants.dart';
-import '../allConstants/text_field_constants.dart';
 import '../allWidgets/common_widgets.dart';
 import '../models/chat_messages.dart';
 import '../providers/auth_provider.dart';
 import '../providers/chat_provider.dart';
-import '../providers/profile_provider.dart';
 import 'login_page.dart';
 
 class ChatPage2 extends StatefulWidget {

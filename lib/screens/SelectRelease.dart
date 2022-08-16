@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'WriteLetter.dart';
-import 'PostBox.dart';
 
 class SelectRelease extends StatefulWidget {
   const SelectRelease({ Key? key }) : super(key: key);

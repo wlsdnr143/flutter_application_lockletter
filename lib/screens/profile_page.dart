@@ -1,11 +1,9 @@
 import 'dart:io';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import '../allConstants/app_constants.dart';
 import '../allConstants/color_constants.dart';
 import '../allConstants/firestore_constants.dart';
 import '../allConstants/text_field_constants.dart';
@@ -232,6 +230,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                 Container(
                                   width: 200,
                                   child: TextField(
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      fontFamily: "NotoSansKR_Regular",
+                                    ),
                                     decoration: InputDecoration(
                                       //icon: Icon(Icons.person),
                                       suffixIcon: GestureDetector(
@@ -254,12 +256,17 @@ class _ProfilePageState extends State<ProfilePage> {
                                   ),
                                 ),
                                 Text(
-                                  '잠긴 글자: 0 글자                       ',
-                                  style: TextStyle(color:Color(0xff999999)),
+                                  '잠긴 글자: 0 글자                        ',
+                                  style: TextStyle(color:Color(0xff999999),
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "NotoSansKR_Regular",),
+
                                 ),
                                 Text(
-                                  '보낸 편지 수: 0 장                      ',
-                                  style: TextStyle(color:Color(0xff999999)),
+                                  '보낸 편지 수: 0 장                       ',
+                                  style: TextStyle(color:Color(0xff999999),
+                                    fontWeight: FontWeight.normal,
+                                    fontFamily: "NotoSansKR_Regular",),
                                 ),
                               ],
                             ),
@@ -309,14 +316,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                       style: TextStyle(
                                           color:Color(0xff433e50),
                                           fontWeight: FontWeight.w400,
-                                          fontFamily: "AppleSDGothicNeo",
+                                          fontFamily: "NotoSansKR_Regular",
                                           fontStyle:FontStyle.normal,
                                           fontSize: 20.0
                                       ),
                                       textAlign: TextAlign.left
                                   ),
                                   onTap: (){
-                                    print('친구 목록 관리');
                                   },
                                   trailing: Icon(Icons.add,color:Colors.blue),
                                 ),
@@ -331,14 +337,13 @@ class _ProfilePageState extends State<ProfilePage> {
                                       style: TextStyle(
                                           color:Color(0xff433e50),
                                           fontWeight: FontWeight.w400,
-                                          fontFamily: "AppleSDGothicNeo",
+                                          fontFamily: "NotoSansKR_Regular",
                                           fontStyle:FontStyle.normal,
                                           fontSize: 20.0
                                       ),
                                       textAlign: TextAlign.left
                                   ),
                                   onTap: (){
-                                    print('구매 목록 관리');
                                   },
                                   trailing: Icon(Icons.add,color:Colors.blue),
                                 ),
@@ -356,7 +361,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         style: TextStyle(
                             color:  Color(0xff000000),
                             fontWeight: FontWeight.w400,
-                            fontFamily: "",
+                            fontFamily: "NotoSansKR_Regular",
                             fontStyle:  FontStyle.normal,
                             fontSize: 20.0
                         ),

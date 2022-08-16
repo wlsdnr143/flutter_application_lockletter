@@ -15,7 +15,12 @@ class LetterBottle extends StatelessWidget {
             centerTitle: true,
             title: const Text(
               '잠긴편지',
-              style: TextStyle(color:Colors.black),
+              style: TextStyle(
+                fontSize: 18,
+                color:  Colors.black,
+                fontWeight: FontWeight.normal,
+                fontFamily: "SANGJU",
+              ),
             ),
             leading: IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
                 onPressed: () {

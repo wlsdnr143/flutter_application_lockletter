@@ -1,3 +1,5 @@
+// 앱으로 온라인 잠긴 편지 작성하기 버튼 누르면 이동되는 페이지
+
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,7 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttergooglesignin/screens/profile_page.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import '../allConstants/color_constants.dart';
@@ -206,6 +207,12 @@ class _FindFriend_TosendLetterState extends State<FindFriend_TosendLetter> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading:  IconButton(
+              onPressed: () {
+                Navigator.pop(context); //뒤로가기
+              },
+              color: Colors.black,
+              icon: Icon(Icons.arrow_back)),
             centerTitle: true,
             backgroundColor: Colors.white,
             title: const Text(

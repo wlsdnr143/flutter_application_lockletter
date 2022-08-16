@@ -4,9 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import '../allConstants/color_constants.dart';
 import '../allConstants/size_constants.dart';
-import '../allConstants/text_field_constants.dart';
 import '../providers/auth_provider.dart';
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -22,13 +20,13 @@ class _LoginPageState extends State<LoginPage> {
 
     switch (authProvider.status) {
       case Status.authenticateError:
-        Fluttertoast.showToast(msg: 'Sign in failed');
+        Fluttertoast.showToast(msg: '로그인 실패');
         break;
       case Status.authenticateCanceled:
-        Fluttertoast.showToast(msg: 'Sign in cancelled');
+        Fluttertoast.showToast(msg: '로그인 취소');
         break;
       case Status.authenticated:
-        Fluttertoast.showToast(msg: 'Sign in successful');
+        Fluttertoast.showToast(msg: '로그인 성공');
         break;
       default:
         break;
