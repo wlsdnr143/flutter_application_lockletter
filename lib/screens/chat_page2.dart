@@ -1,3 +1,5 @@
+//chat_page2 사용중 (이거)
+
 import 'dart:io';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';

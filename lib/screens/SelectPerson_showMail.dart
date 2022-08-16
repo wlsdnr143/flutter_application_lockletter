@@ -22,14 +22,14 @@ import '../utilities/keyboard_utils.dart';
 import 'chat_page.dart';
 import 'login_page.dart';
 
-class SelectPerson_test extends StatefulWidget {
-  const SelectPerson_test({Key? key}) : super(key: key);
+class SelectPerson_showMail extends StatefulWidget {
+  const SelectPerson_showMail({Key? key}) : super(key: key);
 
   @override
-  State<SelectPerson_test> createState() => _SelectPerson_testState();
+  State<SelectPerson_showMail> createState() => _SelectPerson_showMailState();
 }
 
-class _SelectPerson_testState extends State<SelectPerson_test> {
+class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final ScrollController scrollController = ScrollController();
 
@@ -213,24 +213,24 @@ class _SelectPerson_testState extends State<SelectPerson_test> {
               '우체통',
               style: TextStyle(color:Colors.black),
             ),
-            actions: [
+            actions: const [
               // IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
               //     onPressed: () => googleSignOut(),
               //     icon: const Icon(Icons.logout)),
-              IconButton(
-                  onPressed: () {
-                    FlutterDialog();
-                  },
-                  color: Colors.white,
-                  icon: const Icon(Icons.ac_unit_outlined)),
-              IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()));
-                  },
-                  icon: const Icon(Icons.person)),
+              // IconButton(
+              //     onPressed: () {
+              //       FlutterDialog();
+              //     },
+              //     color: Colors.white,
+              //     icon: const Icon(Icons.ac_unit_outlined)),
+              // IconButton(
+              //     onPressed: () {
+              //       Navigator.push(
+              //           context,
+              //           MaterialPageRoute(
+              //               builder: (context) => const ProfilePage()));
+              //     },
+              //     icon: const Icon(Icons.person)),
             ]),
         body: WillPopScope(
           onWillPop: null,

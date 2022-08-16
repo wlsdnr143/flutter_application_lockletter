@@ -1,3 +1,5 @@
+//chat_page2 사용중
+
 import 'dart:io';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -237,7 +239,7 @@ class _ChatPageState extends State<ChatPage> {
                     fontSize: 30,
                     fontFamily: 'KyoboHandwriting2019'),
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 10),
               buildMessageInput(),
             ],
           ),

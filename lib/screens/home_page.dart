@@ -14,8 +14,9 @@ import '../providers/home_provider.dart';
 import '../utilities/debouncer.dart';
 import 'MarketLetter.dart';
 import 'MarketSticker.dart';
+import 'PostBox.dart';
 import 'SelectLetter.dart';
-import 'SelectPerson_test.dart';
+import 'SelectPerson_showMail.dart';
 import 'login_page.dart';
 import 'MarketWriter.dart';
 import 'package:cupertino_icons/cupertino_icons.dart';
@@ -513,7 +514,8 @@ class _HomePageState extends State<HomePage> {
                       onPressed:(){
                         Navigator.push(
                             context, MaterialPageRoute(
-                            builder:(_) => (SelectPerson_test())
+                            //builder:(_) => (SelectPerson_showMail())
+                            builder:(_) => (PostBox())
                         )
                         );
                       },

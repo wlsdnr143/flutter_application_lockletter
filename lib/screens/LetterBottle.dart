@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'SelectPerson_test.dart';
+import 'SelectPerson_showMail.dart';
 import 'WriteLetter.dart';
 
 class LetterBottle extends StatelessWidget {
@@ -26,7 +26,7 @@ class LetterBottle extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                       context, MaterialPageRoute(
-                      builder:(_) => SelectPerson_test())
+                      builder:(_) => SelectPerson_showMail())
                   );
                 },
                 color: Colors.black,
