@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'SelectRelease.dart';
-import 'SelectRelease.dart';
 import 'findFriend_TosendLetter.dart';
 
 class SelectLetter extends StatelessWidget {
@@ -62,7 +60,6 @@ class SelectLetter extends StatelessWidget {
                           fontSize: 12.0
                       ),),
                       onTap: (){
-                        print('손편지 작성하기');
                       },
                       trailing: Icon(Icons.arrow_forward,color:Colors.blue),
                     ),
@@ -70,7 +67,7 @@ class SelectLetter extends StatelessWidget {
               ),
               Card(
                   child:Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(17.0),
                     child: ListTile(
                       title:Row(
                         children: const [

@@ -45,11 +45,6 @@ class _SplashPageState extends State<SplashPage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              "잠긴편지",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: Sizes.dimen_18),
-            ),
             Image.asset(
               'assets/images/before_login.png',
               width: 300,

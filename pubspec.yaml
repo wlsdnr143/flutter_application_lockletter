@@ -122,6 +122,8 @@ flutter:
     - assets/images/favorite2.png
     - assets/images/favorite3.png
     - assets/images/favorite4.png
+    - assets/images/lock_Letter.png
+    - assets/images/sendLetter.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

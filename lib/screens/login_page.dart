@@ -49,21 +49,33 @@ class _LoginPageState extends State<LoginPage> {
                 '잠긴편지에 오신 것을 환영합니다',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: Sizes.dimen_20,
-                ),
+                    color: Color(0xff505050),
+                    fontSize: 18,
+                    fontFamily: 'SeoulNamsanM'),
               ),
-              SizedBox(height: 250),
-              GestureDetector(
-                onTap: () async {
-                  bool isSuccess = await authProvider.handleGoogleSignIn();
-                  if (isSuccess) {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const MyBottomNavigationBar()));
-                  }
-                },
-                child: Image.asset('assets/images/google_login.png'),
+              SizedBox(height: 200),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: Color(0xffdbdbdb),
+                  ),
+                ), //  POINT: BoxDecoration
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: GestureDetector(
+                    onTap: () async {
+                      bool isSuccess = await authProvider.handleGoogleSignIn();
+                      if (isSuccess) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MyBottomNavigationBar()));
+                      }
+                    },
+                    child: Image.asset('assets/images/google_login.png'),
+                  ),
+                ),
               ),
             ],
           ),

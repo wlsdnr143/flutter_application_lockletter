@@ -9,12 +9,15 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
           elevation:0.0,
           centerTitle: false,
           title: const Text(
-            '    설정',
-            style: TextStyle(color:Colors.black),
+            '   설정',
+            style: TextStyle(color:Colors.black,
+            fontFamily: ('NotoSansKR_Medium'),
+                fontSize: 19),
           ),
         ),
         body: SingleChildScrollView(

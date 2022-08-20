@@ -1,25 +1,23 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttergooglesignin/screens/chat_page2.dart';
-import 'package:fluttergooglesignin/screens/profile_page.dart';
+import 'package:flutter/widgets.dart';
+import 'package:fluttergooglesignin/allConstants/all_constants.dart';
+import 'package:fluttergooglesignin/providers/chat_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../allConstants/color_constants.dart';
-import '../allConstants/firestore_constants.dart';
 import '../allConstants/size_constants.dart';
 import '../allConstants/text_field_constants.dart';
 import '../allWidgets/loading_view.dart';
-import '../models/chat_user.dart';
 import '../providers/auth_provider.dart';
 import '../providers/home_provider.dart';
+import '../providers/profile_provider.dart';
 import '../utilities/debouncer.dart';
-import '../utilities/keyboard_utils.dart';
-import 'chat_page.dart';
 import 'login_page.dart';
 
 class SelectPerson_showMail extends StatefulWidget {
@@ -33,6 +31,10 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
   final GoogleSignIn googleSignIn = GoogleSignIn();
   final ScrollController scrollController = ScrollController();
 
+  bool fromTo = true;
+  String from = '';
+  String to = '';
+
   int _limit = 20;
   final int _limitIncrement = 20;
   String _textSearch = "";
@@ -41,6 +43,9 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
   late AuthProvider authProvider;
   late String currentUserId;
   late HomeProvider homeProvider;
+  late ChatProvider chatProvier;
+  late ProfileProvider profileProvier;
+
 
   Debouncer searchDebouncer = Debouncer(milliseconds: 300);
   StreamController<bool> buttonClearController = StreamController<bool>();
@@ -149,7 +154,13 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
     super.initState();
     authProvider = context.read<AuthProvider>();
     homeProvider = context.read<HomeProvider>();
-    if (authProvider.getFirebaseUserId()?.isNotEmpty == true) {
+    chatProvier = context.read<ChatProvider>();
+    profileProvier = context.read<ProfileProvider>();
+    profileProvier.init();
+
+    if (authProvider
+        .getFirebaseUserId()
+        ?.isNotEmpty == true) {
       currentUserId = authProvider.getFirebaseUserId()!;
     } else {
       Navigator.of(context).pushAndRemoveUntil(
@@ -160,7 +171,8 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
     scrollController.addListener(scrollListener);
   }
 
-  void FlutterDialog() { // 알림창 함수
+  void FlutterDialog() {
+    // 알림창 함수
     showDialog(
         context: context,
         //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
@@ -186,7 +198,8 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
             ),
             actions: <Widget>[
               CupertinoButton( // currentUserId 복사 버튼
-                child: const Text("복사", style: TextStyle(color: Colors.blue, fontSize: 15)),
+                child: const Text(
+                    "복사", style: TextStyle(color: Colors.blue, fontSize: 15)),
                 color: Colors.white,
                 onPressed: () {
                   Clipboard.setData(ClipboardData(text: currentUserId));
@@ -205,82 +218,201 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.white,
-            title: const Text(
-              '우체통',
-              style: TextStyle(color:Colors.black),
-            ),
-            actions: const [
-              // IconButton( // 로그아웃하는 버튼 누르면 login_page로 돌아감
-              //     onPressed: () => googleSignOut(),
-              //     icon: const Icon(Icons.logout)),
-              // IconButton(
-              //     onPressed: () {
-              //       FlutterDialog();
-              //     },
-              //     color: Colors.white,
-              //     icon: const Icon(Icons.ac_unit_outlined)),
-              // IconButton(
-              //     onPressed: () {
-              //       Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => const ProfilePage()));
-              //     },
-              //     icon: const Icon(Icons.person)),
-            ]),
-        body: WillPopScope(
-          onWillPop: null,
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  buildSearchBar(),
-                  Expanded(
-                    child: StreamBuilder<QuerySnapshot>(
-                      stream: homeProvider.getFirestoreData(
-                          FirestoreConstants.pathUserCollection,
-                          _limit,
-                          _textSearch),
-                      builder: (BuildContext context,
-                          AsyncSnapshot<QuerySnapshot> snapshot) {
-                        if (snapshot.hasData) {
-                          if ((snapshot.data?.docs.length ?? 0) > 0) {
-                            return ListView.separated(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.docs.length,
-                              itemBuilder: (context, index) => buildItem(
-                                  context, snapshot.data?.docs[index]),
-                              controller: scrollController,
-                              separatorBuilder:
-                                  (BuildContext context, int index) =>
-                              const Divider(),
-                            );
-                          } else {
-                            return const Center(
-                              child: Text('No user found...'),
-                            );
-                          }
-                        } else {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
-                    ),
+    return DefaultTabController(
+        length: 4,
+        child: Scaffold(
+            appBar: AppBar(
+                leading:  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context); //뒤로가기
+                    },
+                    color: Colors.black,
+                    icon: Icon(Icons.arrow_back)),
+                title: const Text(
+                  '우체통',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color:  Colors.black,
+                    fontWeight: FontWeight.normal,
+                    fontFamily: "NotoSansKR_Medium",
                   ),
-                ],
+                ),
+                centerTitle: false,
+                backgroundColor: Colors.transparent,
+                elevation: 0.0,
+                bottom: const TabBar(
+                  indicatorColor: Colors.blue,
+                  labelColor: Colors.black,
+                  unselectedLabelColor: Color(0xff767676),
+                  unselectedLabelStyle: TextStyle(color:  Color(0xff767676), fontSize: 10),
+                    tabs: <Widget>[
+                      Tab(
+                        child: Text(
+                            '받은편지함',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'NotoSansKR_Regular',
+                                fontSize: 12.0
+                            )
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                            '보낸편지함',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'NotoSansKR_Regular',
+                                fontSize: 12.0
+                            )
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                            '내게 쓴 편지',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 11.0,
+                                fontFamily: 'NotoSansKR_Regular',
+                            )
+                        ),
+                      ),
+                      Tab(
+                        child: Text(
+                            '즐겨찾기',
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'NotoSansKR_Regular',
+                                fontSize: 12.0
+                            )
+                        ),
+                      )
+                    ],
+                )
+            ),
+            body: WillPopScope(
+              onWillPop: null,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                child: Stack(
+                  children: [
+                    const SizedBox(height: 500),
+                    TabBarView(
+                      children:[
+                        Column(
+                        children: [
+                          //const SizedBox(height: 30),
+                          Expanded(
+                            child: StreamBuilder<QuerySnapshot>(
+                              stream: chatProvier.getMailStream(
+                                  authProvider.firebaseAuth.currentUser!.uid, 100),
+                              builder: (BuildContext context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.hasData) {
+                                  fromTo = false;
+                                  final allData = snapshot.data!.docs.map((doc) =>
+                                      doc.data()).toList();
+                                  if ((snapshot.data?.docs.length ?? 0) > 0) {
+                                    return ListView.separated(
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.docs.length,
+                                      itemBuilder: (context, index) =>
+                                          buildItem(
+                                              context, snapshot.data?.docs[index],false),
+                                      controller: scrollController,
+                                      separatorBuilder:
+                                          (BuildContext context, int index) =>
+                                      const Divider(),
+                                    );
+                                  } else {
+                                    return const Center(
+                                      child: Text('받은 편지가 없습니다'),
+                                    );
+                                  }
+                                } else {
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                }
+                              },
+                            ),
+                          ),
+                          SizedBox(height:10),
+                        ],
+                      ),
+                    Column( // 보낸 편지함
+                      children: [
+                        //const SizedBox(height: 30),
+                        Expanded(
+                          child: StreamBuilder<QuerySnapshot>(
+                            stream: chatProvier.getSendMailStream(authProvider.firebaseAuth.currentUser!.uid, 100),
+                            builder: (BuildContext context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.hasData) {
+                                fromTo = true;
+                                final allData = snapshot.data!.docs.map((doc) =>
+                                    doc.data()).toList();
+                                if ((snapshot.data?.docs.length ?? 0) > 0) {
+                                  return ListView.separated(
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) =>
+                                        buildItem(
+                                            context, snapshot.data?.docs[index],true),
+                                    controller: scrollController,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) => const Divider(),
+                                  );
+                                } else {
+                                  return const Center(
+                                    child: Text('보낸 편지가 없습니다'),
+                                  );
+                                }
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          ),
+                        ),
+                        SizedBox(height:10),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        SizedBox(height:210),
+                        Center(
+                          child: Container(
+                            child: Text(
+                              '개발중',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontFamily: 'SeoulNamsanM'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                        Column(
+                          children: [
+                            SizedBox(height:210),
+                            Center(
+                              child: Container(
+                                child: Text(
+                                  '개발중',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                      fontFamily: 'SeoulNamsanM'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),],)]
+                ),
               ),
-              Positioned(
-                child:
-                isLoading ? const LoadingView() : const SizedBox.shrink(),
-              ),
-            ],
-          ),
-        ));
+            )));
   }
 
   Widget buildSearchBar() {
@@ -353,73 +485,225 @@ class _SelectPerson_showMailState extends State<SelectPerson_showMail> {
     );
   }
 
-  Widget buildItem(BuildContext context, DocumentSnapshot? documentSnapshot) {
-    final firebaseAuth = FirebaseAuth.instance;
-    if (documentSnapshot != null) {
-      ChatUser userChat = ChatUser.fromDocument(documentSnapshot);
-      if (userChat.id == currentUserId) {
-        return const SizedBox.shrink();
-      } else {
-        return TextButton(
-          onPressed: () {
-            if (KeyboardUtils.isKeyboardShowing()) {
-              KeyboardUtils.closeKeyboard(context);
-            }
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => ChatPage2(
-                      peerId: userChat.id,
-                      peerAvatar: userChat.photoUrl,
-                      peerNickname: userChat.displayName,
-                      userAvatar: firebaseAuth.currentUser!.photoURL!,
-                    )));
-          },
-          child: ListTile(
-            leading: userChat.photoUrl.isNotEmpty
-                ? ClipRRect(
-              borderRadius: BorderRadius.circular(Sizes.dimen_30),
-              child: Image.network(
-                userChat.photoUrl,
-                fit: BoxFit.cover,
-                width: 50,
-                height: 50,
-                loadingBuilder: (BuildContext ctx, Widget child,
-                    ImageChunkEvent? loadingProgress) {
-                  if (loadingProgress == null) {
-                    return child;
-                  } else {
-                    return SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: CircularProgressIndicator(
-                          color: Colors.grey,
-                          value: loadingProgress.expectedTotalBytes !=
-                              null
-                              ? loadingProgress.cumulativeBytesLoaded /
-                              loadingProgress.expectedTotalBytes!
-                              : null),
-                    );
-                  }
-                },
-                errorBuilder: (context, object, stackTrace) {
-                  return const Icon(Icons.account_circle, size: 50);
-                },
-              ),
-            )
-                : const Icon(
-              Icons.account_circle,
-              size: 50,
-            ),
-            title: Text(
-              userChat.displayName,
-              style: const TextStyle(color: Colors.black),
-            ),
-          ),
-        );
-      }
-    } else {
-      return const SizedBox.shrink();
+  Widget buildItem(BuildContext context, DocumentSnapshot? documentSnapshot,bool self) {
+    String senderId = self?documentSnapshot!.get('idTo'):documentSnapshot!.get('idFrom');
+    String timestamp = documentSnapshot!.get('timestamp');
+    String content = documentSnapshot!.get('content');
+
+    String stringFromto = '';
+    String who = profileProvier.profileMap[senderId]['displayName'];
+
+    if(fromTo == false){
+      stringFromto = 'From. ' + profileProvier.profileMap[senderId]['displayName'];
     }
+    else{
+      stringFromto = 'To. ' + profileProvier.profileMap[senderId]['displayName'];
+    }
+
+    if (documentSnapshot != null) {
+      return Padding(
+        padding: const EdgeInsets.fromLTRB(0.0, 0,0.0,0.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            MaterialButton(
+              onPressed: (){
+                Navigator.push(
+                  context,MaterialPageRoute(
+                  builder: (context) => LetterViewer(text:content,
+                      //who:senderId
+                    id : who,
+                  ),
+                ),);},
+              child: ListTile(
+                visualDensity: VisualDensity(horizontal: 0, vertical: 0),
+                shape: RoundedRectangleBorder(
+                  side: const BorderSide(color : Color.fromRGBO(112, 112, 112, 0.5), width: 1),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                leading: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minWidth: 20,
+                    minHeight: 20,
+                    maxWidth: 40,
+                    maxHeight: 40,
+                  ),
+                    child: Image.asset('assets/images/invalid_name.png', fit: BoxFit.cover),
+                  // child: Image.network(
+                  //   profileProvier.profileMap[senderId]['photoUrl'],
+                  //   fit: BoxFit.cover,
+                  //   width: 50,
+                  //   height: 50,
+                  //   loadingBuilder: (BuildContext ctx, Widget child,
+                  //       ImageChunkEvent? loadingProgress) {
+                  //     if (loadingProgress == null) {
+                  //       return child;
+                  //     } else {
+                  //       return SizedBox(
+                  //         width: 50,
+                  //         height: 50,
+                  //         child: CircularProgressIndicator(
+                  //             color: Colors.grey,
+                  //             value: loadingProgress.expectedTotalBytes !=
+                  //                 null
+                  //                 ? loadingProgress.cumulativeBytesLoaded /
+                  //                 loadingProgress.expectedTotalBytes!
+                  //                 : null),
+                  //       );
+                  //     }
+                  //   },
+                  //   errorBuilder: (context, object, stackTrace) {
+                  //     return const Icon(Icons.account_circle, size: 50);
+                  //   },
+                  // ),
+                ),
+
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            stringFromto,
+                            style: const TextStyle(color: Colors.black,
+                                fontSize: 13),
+                            textAlign: TextAlign.left,
+                          ),
+                          Text(
+                            content[0]+content[1] + content[2] + content[3] + content[4] + content[5] +
+                                content[6] +content[7] + content[8] +'..',
+                            style: const TextStyle(color: Colors.black38,
+                                fontSize: 13),
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          DateFormat('\n\n받은날: yyyy.MM.dd').format(
+                            DateTime.fromMillisecondsSinceEpoch(
+                              int.parse(timestamp),
+                            ),
+                          ),
+                          style: const TextStyle(
+                              color: AppColors.lightGrey,
+                              fontSize: 10,
+                              fontStyle: FontStyle.italic),
+                        ),
+                        const Text(
+                          '개봉일: 20xx.xx.xx   ',
+                          style: TextStyle(
+                              color: AppColors.lightGrey,
+                              fontSize: 10,
+                              fontStyle: FontStyle.italic),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+    return Text('');
   }
 }
+
+
+class LetterViewer extends StatelessWidget {
+   LetterViewer({key,
+    required this.text, required this.id,
+    // required this.who
+  }) : super(key: key);
+
+  final String text;
+  final String id;
+  var textLength = 0;
+  // final String who;
+
+  @override
+  Widget build(BuildContext context) { // 편지가 보여지는 창
+    if(text.length<500){
+      textLength = 500;
+    }
+    else {
+      textLength = text.length;
+    }
+
+    return Scaffold(
+      appBar:AppBar(
+        leading:  IconButton(
+            onPressed: () {
+              Navigator.pop(context); //뒤로가기
+            },
+            color: Colors.black,
+            icon: Icon(Icons.arrow_back)),
+        backgroundColor: Colors.transparent,
+        elevation:0.0,
+        centerTitle: false,
+        title: const Text(
+          '열린편지',
+          style: TextStyle(color:Colors.black),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(height:20),
+              const Text('보낸사람',
+                style: TextStyle(
+                    color:Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: "SCDream4",
+                    fontStyle:  FontStyle.normal,
+                    fontSize: 15.0
+                ),),
+              SizedBox(height:7),
+              Text(id,
+                style: const TextStyle(
+                    color:Color(0xff767676),
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "NotoSansKR_Regular",
+                    fontStyle:  FontStyle.normal,
+                    fontSize: 13.0
+                ),),
+              SizedBox(height:20),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xfff1f1f5),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.transparent,
+                  ),
+                ), //  POINT: BoxDecoration
+                width: 300,
+                height: textLength+10,
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Text(text,
+                    style: const TextStyle(
+                        color:Color(0xff433e50),
+                        fontWeight: FontWeight.w300,
+                        fontFamily: "SCDream4",
+                        fontStyle:  FontStyle.normal,
+                        fontSize: 14.0
+                    ),),
+                ),
+              ),
+              SizedBox(height:30),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+

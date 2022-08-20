@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttergooglesignin/providers/profile_provider.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import '../allConstants/color_constants.dart';
@@ -14,7 +15,6 @@ import '../providers/home_provider.dart';
 import '../utilities/debouncer.dart';
 import 'MarketLetter.dart';
 import 'MarketSticker.dart';
-import 'PostBox.dart';
 import 'SelectLetter.dart';
 import 'SelectPerson_showMail.dart';
 import 'login_page.dart';
@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
   late AuthProvider authProvider;
   late String currentUserId;
   late HomeProvider homeProvider;
+  late ProfileProvider profileProvider;
 
   Debouncer searchDebouncer = Debouncer(milliseconds: 300);
   StreamController<bool> buttonClearController = StreamController<bool>();
@@ -155,6 +156,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     authProvider = context.read<AuthProvider>();
     homeProvider = context.read<HomeProvider>();
+    profileProvider = context.read<ProfileProvider>();
+    profileProvider.init();
     if (authProvider.getFirebaseUserId()?.isNotEmpty == true) {
       currentUserId = authProvider.getFirebaseUserId()!;
     } else {
@@ -198,9 +201,14 @@ class _HomePageState extends State<HomePage> {
                   icon: const Icon(Icons.logout)),
             actions: [
               IconButton(
-                  onPressed: (){},
+                  onPressed: () {
+                    Navigator.push(
+                        context, MaterialPageRoute(
+                        builder:(_) => SelectPerson_showMail())
+                    );
+                  },
                   color: Colors.black,
-                  icon: const Icon(Icons.calendar_today_outlined)),
+                  icon: const Icon(Icons.local_post_office_outlined)),
               IconButton(
                   onPressed: (){},
                   color: Colors.black,
@@ -515,7 +523,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.push(
                             context, MaterialPageRoute(
                             //builder:(_) => (SelectPerson_showMail())
-                            builder:(_) => (PostBox())
+                            builder:(_) => (SelectPerson_showMail())
                         )
                         );
                       },
@@ -603,27 +611,6 @@ class _HomePageState extends State<HomePage> {
                                       fontStyle: FontStyle.normal
                                   )
                               ),
-                              // Container(
-                              //     child:Column(
-                              //       crossAxisAlignment:CrossAxisAlignment.end,
-                              //       children: const [
-                              //         Text(
-                              //             '받은날: 21.01.01',
-                              //             style:TextStyle(
-                              //                 color:Color(0xff767676),
-                              //                 fontSize:8.0
-                              //             )
-                              //         ),
-                              //         Text(
-                              //             '개봉일: 22.02.25',
-                              //             style:TextStyle(
-                              //                 color:Color(0xff767676),
-                              //                 fontSize:8.0
-                              //             )
-                              //         )
-                              //       ],
-                              //     )
-                              // )
                             ]
                         )
                     ),

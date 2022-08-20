@@ -10,11 +10,14 @@ class ChatMessages {
   int type;
 
   ChatMessages(
-      {required this.idFrom,
-      required this.idTo,
-      required this.timestamp,
-      required this.content,
-      required this.type});
+      {
+        required this.idFrom,
+        required this.idTo,
+        required this.timestamp,
+        required this.content,
+        required this.type
+      }
+      );
 
   Map<String, dynamic> toJson() {
     return {

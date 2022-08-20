@@ -163,12 +163,15 @@ class _ProfilePageState extends State<ProfilePage> {
         Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
+            automaticallyImplyLeading: false,
               backgroundColor: Colors.white,
               elevation:0.0,
               centerTitle: false,
               title: const Text(
-                '  마이페이지',
-                style: TextStyle(color:Colors.black),
+                '   마이페이지',
+                style: TextStyle(color:Colors.black,
+                    fontFamily: 'NotoSansKR_Medium',
+                fontSize: 19),
               ),
           ),
           body: Stack(
@@ -369,7 +372,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ), // 즐겨찾는 필체 글씨
                       const SizedBox(height: 20),
                       Row(
-                        //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Container(
                               width: 85,

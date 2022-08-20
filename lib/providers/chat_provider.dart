@@ -40,6 +40,69 @@ class ChatProvider {
         .snapshots();
   }
 
+  Stream<QuerySnapshot> getMailStream(String userId, int limit) { //한 사용자에게 수신된 메시지 가져오기
+    return firebaseFirestore
+        .collection(FirestoreConstants.mailbox)
+        .doc(userId)
+        .collection(FirestoreConstants.mailbox)
+        .orderBy(FirestoreConstants.timestamp, descending: true)
+        .limit(limit)
+        .snapshots();
+  }
+
+  Stream<QuerySnapshot> getSendMailStream(String userId, int limit) { //한 사용자에게 수신된 메시지 가져오기
+    return firebaseFirestore
+        .collection(FirestoreConstants.sendmailbox)
+        .doc(userId)
+        .collection(FirestoreConstants.sendmailbox)
+        .orderBy(FirestoreConstants.timestamp, descending: true)
+        .limit(limit)
+        .snapshots();
+  }
+
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getChatProfile(String userId) async{ //한 사용자에게 수신된 메시지 가져오기
+    DocumentSnapshot<Map<String, dynamic>> doc =  await firebaseFirestore
+        .collection(FirestoreConstants.pathUserCollection)
+        .doc(userId)
+        .get();
+    return doc;
+  }
+
+
+
+  void sendMail (String content, int type, // Firestore 데이터베이스의 도움으로 다른 사용자에게 메시지를 보내고 그 안에 해당 메시지를 저장
+      String currentUserId, String peerId) {
+    String now = DateTime.now().millisecondsSinceEpoch.toString();
+
+    DocumentReference documentReference = firebaseFirestore
+        .collection(FirestoreConstants.mailbox)
+        .doc(peerId).collection(FirestoreConstants.mailbox)
+        .doc(now);
+
+    ChatMessages chatMessages = ChatMessages(
+        idFrom: currentUserId,
+        idTo: peerId,
+        timestamp: now,
+        content: content, // 여기에 메세지 내용이 담김
+        type: type);
+
+    FirebaseFirestore.instance.runTransaction((transaction) async {
+      transaction.set(documentReference, chatMessages.toJson()); // 위에 chatMessages에서 받아왔던 currentUserId, peerId , 등등이 toJson으로 전달됨
+    });
+
+    DocumentReference documentReferencetome = firebaseFirestore
+        .collection(FirestoreConstants.sendmailbox)
+        .doc(currentUserId).collection(FirestoreConstants.sendmailbox)
+        .doc(now);
+
+    FirebaseFirestore.instance.runTransaction((transaction) async {
+      transaction.set(documentReferencetome, chatMessages.toJson()); // for send message 받아왔던 currentUserId, peerId , 등등이 toJson으로 전달됨
+    });
+
+  }
+
+
   void sendChatMessage(String content, int type, String groupChatId, // Firestore 데이터베이스의 도움으로 다른 사용자에게 메시지를 보내고 그 안에 해당 메시지를 저장
       String currentUserId, String peerId) {
     DocumentReference documentReference = firebaseFirestore
@@ -47,6 +110,7 @@ class ChatProvider {
         .doc(groupChatId)
         .collection(groupChatId)
         .doc(DateTime.now().millisecondsSinceEpoch.toString());
+
     ChatMessages chatMessages = ChatMessages(
         idFrom: currentUserId,
         idTo: peerId,

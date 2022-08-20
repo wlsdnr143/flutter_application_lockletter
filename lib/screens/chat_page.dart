@@ -1,33 +1,29 @@
-//chat_page2 사용중
+//친구에게 보내는 편지 전송창
 
 import 'dart:io';
+import 'package:fluttergooglesignin/screens/sendComplete.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../allConstants/color_constants.dart';
 import '../allConstants/firestore_constants.dart';
-import '../allConstants/size_constants.dart';
-import '../allConstants/text_field_constants.dart';
-import '../allWidgets/common_widgets.dart';
-import '../models/chat_messages.dart';
 import '../providers/auth_provider.dart';
 import '../providers/chat_provider.dart';
 import 'login_page.dart';
 
 class ChatPage extends StatefulWidget {
   final String peerId;
-  final String peerAvatar;
   final String peerNickname;
-  final String userAvatar;
+  //final String peerAvatar;
+  //final String userAvatar;
 
   const ChatPage(
       {Key? key,
       required this.peerNickname,
-      required this.peerAvatar,
       required this.peerId,
-      required this.userAvatar})
+        //required this.peerAvatar,
+      //required this.userAvatar
+      })
       : super(key: key);
 
   @override
@@ -84,12 +80,14 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   void readLocal() {
-    if (authProvider.getFirebaseUserId()?.isNotEmpty == true) {
+    if (authProvider
+        .getFirebaseUserId()
+        ?.isNotEmpty == true) {
       currentUserId = authProvider.getFirebaseUserId()!;
     } else {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const LoginPage()),
-          (Route<dynamic> route) => false);
+              (Route<dynamic> route) => false);
     }
     if (currentUserId.compareTo(widget.peerId) > 0) {
       groupChatId = '$currentUserId - ${widget.peerId}';
@@ -134,39 +132,48 @@ class _ChatPageState extends State<ChatPage> {
     return Future.value(false);
   }
 
-  // void _callPhoneNumber(String phoneNumber) async {
-  //   var url = 'tel://$phoneNumber';
-  //   if (await canLaunch(url)) {
-  //     await launch(url);
-  //   } else {
-  //     throw 'Error Occurred';
-  //   }
-  // }
-
-  // void uploadImageFile() async { // 채팅 중인 사용자에게 이미지를 보내고 Firebase 저장소에 이미지를 저장하고 해당 URL 정보를 Firestore 데이터베이스에 저장
-  //   String fileName = DateTime.now().millisecondsSinceEpoch.toString();
-  //   UploadTask uploadTask = chatProvider.uploadImageFile(imageFile!, fileName);
-  //   try {
-  //     TaskSnapshot snapshot = await uploadTask;
-  //     imageUrl = await snapshot.ref.getDownloadURL();
-  //     setState(() {
-  //       isLoading = false;
-  //       onSendMessage(imageUrl, MessageType.image);
-  //     });
-  //   } on FirebaseException catch (e) {
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //     Fluttertoast.showToast(msg: e.message ?? e.toString());
-  //   }
-  // }
+  void FlutterDialog() {
+    showDialog(
+        context: context,
+        //barrierDismissible - Dialog를 제외한 다른 화면 터치 x
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            // RoundedRectangleBorder - Dialog 화면 모서리 둥글게 조절
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "10글자 이상 입력해주세요",
+                ),
+              ],
+            ),
+            actions: <Widget>[
+              new FlatButton(
+                child: new Text("확인"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        });
+  }
 
   void onSendMessage(String content, int type) {
     // create a method to send chat messages and execute our sendChatMessage function from our ChatProvider class
-    if (content.trim().isNotEmpty) {
+    if (content
+        .trim()
+        .isNotEmpty) {
       textEditingController.clear();
-      chatProvider.sendChatMessage(
-          content, type, groupChatId, currentUserId, widget.peerId);
+      // chatProvider.sendChatMessage(
+      //     content, type, groupChatId, currentUserId, widget.peerId);
+      chatProvider.sendMail(content, type, currentUserId,
+          widget.peerId); // change end point to the firebase
       scrollController.animateTo(0,
           duration: const Duration(milliseconds: 300), curve: Curves.easeOut);
     }
@@ -179,8 +186,8 @@ class _ChatPageState extends State<ChatPage> {
   // checking if received message
   bool isMessageReceived(int index) {
     if ((index > 0 &&
-            listMessages[index - 1].get(FirestoreConstants.idFrom) ==
-                currentUserId) ||
+        listMessages[index - 1].get(FirestoreConstants.idFrom) ==
+            currentUserId) ||
         index == 0) {
       return true;
     } else {
@@ -191,8 +198,8 @@ class _ChatPageState extends State<ChatPage> {
   // checking if sent message
   bool isMessageSent(int index) {
     if ((index > 0 &&
-            listMessages[index - 1].get(FirestoreConstants.idFrom) !=
-                currentUserId) ||
+        listMessages[index - 1].get(FirestoreConstants.idFrom) !=
+            currentUserId) ||
         index == 0) {
       return true;
     } else {
@@ -203,13 +210,24 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset : false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context); //뒤로가기
+            },
+            color: Colors.black,
+            icon: Icon(Icons.arrow_back)),
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        elevation:0.0,
+        elevation: 0.0,
         title: Text('${widget.peerNickname}에게 보내는 편지'.trim(),
-            style: const TextStyle(color:Colors.black)
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.black,
+            fontWeight: FontWeight.normal,
+            fontFamily: "NotoSansKR_Medium",
+          ),
         ),
         // actions: [
         //   IconButton(
@@ -227,17 +245,52 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: Sizes.dimen_8),
+          padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 50),
               // buildListMessage(),
-              const Text(
-                '온라인 잠긴편지',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                    fontFamily: 'KyoboHandwriting2019'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '온라인 잠긴편지',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 22,
+                        fontFamily: 'NotoSansKR_Bold'),
+                  ),
+                  ElevatedButton(
+                      onPressed: () {
+                        if (textEditingController.text.length < 10) {
+                          FlutterDialog();
+                        }
+                        else {
+                          onSendMessage(
+                              textEditingController.text, MessageType.text);
+                          Navigator.push(
+                              context, MaterialPageRoute(
+                              builder: (_) => const SendComplete()
+                          )
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                          primary: Color(0xff6bb9ff),
+                          minimumSize: Size(50, 20),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0))),
+                      child: Padding(
+                        padding: const EdgeInsets.all(6.0),
+                        child: const Text(
+                          '보내기',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontFamily: 'KyoboHandwriting2019'),
+                        ),
+                      )),
+                ],
               ),
               const SizedBox(height: 10),
               buildMessageInput(),
@@ -250,278 +303,57 @@ class _ChatPageState extends State<ChatPage> {
 
 
   Widget buildMessageInput() {
+    late ScrollController _scrollController;
+
+    void initState() {
+      super.initState();
+      _scrollController = ScrollController();
+    }
+
+    void dispose() {
+      _scrollController.dispose();
+      super.dispose();
+    }
     // 사용자가 문자 메시지를 입력하고 보내기 버튼을 클릭하여 메시지를 보낼 입력 필드를 만들어야 합니다 .
     // 또한 이미지 선택기 버튼을 사용하여 사용자가 클릭하면 장치의 파일 선택기가 열리고 이미지를 선택하여 사용자에게 보냅니다.
     return SizedBox(
-      width: double.infinity,
-      height: 500,
-      child: Column(
-        children: [
-          // Container(
-          //   margin: const EdgeInsets.only(right: Sizes.dimen_4),
-          //   decoration: BoxDecoration(
-          //     color: AppColors.burgundy,
-          //     borderRadius: BorderRadius.circular(Sizes.dimen_30),
-          //   ),
-          //   child: IconButton(
-          //     onPressed: getImage,
-          //     icon: const Icon(
-          //       Icons.camera_alt,
-          //       size: Sizes.dimen_28,
-          //     ),
-          //     color: AppColors.white,
-          //   ),
-          // ),
-          Flexible(
-              child: TextFormField(
-            focusNode: focusNode,
-            textInputAction: TextInputAction.newline,
-                // TextInputAction.send 로 하면 보내기버튼 TextInputAction.go로 하면 엔터
-            keyboardType: TextInputType.multiline,
-            maxLines: 15,
-            maxLength: 900,
-            textCapitalization: TextCapitalization.sentences,
-            controller: textEditingController,
-            decoration: kTextInputDecoration.copyWith(hintText: 'write here...'),
-            //onFieldSubmitted: (value) {
-            //  onSendMessage(textEditingController.text, MessageType.text);
-            //},
-          )),
-          Container(
-            margin: const EdgeInsets.only(left: Sizes.dimen_4),
-            decoration: BoxDecoration(
-              color: AppColors.burgundy,
-              borderRadius: BorderRadius.circular(Sizes.dimen_30),
-            ),
-            child: IconButton(
-              onPressed: () {
-                onSendMessage(textEditingController.text, MessageType.text);
-                //print(textEditingController.text);
-              },
-              icon: const Icon(Icons.send_rounded),
-              color: AppColors.white,
-            ),
+          width: double.infinity,
+          height: 500,
+          child: Column(
+            children: [
+              Flexible(
+                  child: SingleChildScrollView(
+                    //controller: _scrollController,
+                    child: TextFormField(
+                      onTap: () {
+                        //120만큼 500milSec 동안 뷰를 올려줌
+                        _scrollController.animateTo(120.0,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.ease);
+                      },
+                      focusNode: focusNode,
+                      textInputAction: TextInputAction.newline,
+                      // TextInputAction.send 로 하면 보내기버튼 TextInputAction.go로 하면 엔터
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 30,
+                      maxLength: 900,
+                      textCapitalization: TextCapitalization.sentences,
+                      controller: textEditingController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        fillColor: Color(0xfff1f1f5),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white, width: 2.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white, width: 2.0),
+                        ),
+                      ),
+                    ),
+                  )),
+              //SizedBox(height:300),
+            ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget buildItem(int index, DocumentSnapshot? documentSnapshot) {
-    // 프로필 사진과 함께 주고받은 문자 메시지에 대한 채팅 풍선을 생성합니다.
-    if (documentSnapshot != null) {
-      ChatMessages chatMessages = ChatMessages.fromDocument(documentSnapshot);
-      if (chatMessages.idFrom == currentUserId) {
-        // right side (my message)
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                chatMessages.type == MessageType.text
-                    ? messageBubble(
-                        chatContent: chatMessages.content,
-                        color: AppColors.spaceLight,
-                        textColor: AppColors.white,
-                        margin: const EdgeInsets.only(right: Sizes.dimen_10),
-                      )
-                    : chatMessages.type == MessageType.image
-                        ? Container(
-                            margin: const EdgeInsets.only(
-                                right: Sizes.dimen_10, top: Sizes.dimen_10),
-                            child: chatImage(
-                                imageSrc: chatMessages.content, onTap: () {}),
-                          )
-                        : const SizedBox.shrink(),
-                isMessageSent(index)
-                    ? Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Sizes.dimen_20),
-                        ),
-                        child: Image.network(
-                          widget.userAvatar,
-                          width: Sizes.dimen_40,
-                          height: Sizes.dimen_40,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (BuildContext ctx, Widget child,
-                              ImageChunkEvent? loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.burgundy,
-                                value: loadingProgress.expectedTotalBytes !=
-                                            null &&
-                                        loadingProgress.expectedTotalBytes !=
-                                            null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, object, stackTrace) {
-                            return const Icon(
-                              Icons.account_circle,
-                              size: 35,
-                              color: AppColors.greyColor,
-                            );
-                          },
-                        ),
-                      )
-                    : Container(
-                        width: 35,
-                      ),
-              ],
-            ),
-            isMessageSent(index)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                        right: Sizes.dimen_50,
-                        top: Sizes.dimen_6,
-                        bottom: Sizes.dimen_8),
-                    child: Text(
-                      DateFormat('dd MMM yyyy, hh:mm a').format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                          int.parse(chatMessages.timestamp),
-                        ),
-                      ),
-                      style: const TextStyle(
-                          color: AppColors.lightGrey,
-                          fontSize: Sizes.dimen_12,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ],
         );
-      } else {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                isMessageReceived(index)
-                    // left side (received message)
-                    ? Container(
-                        clipBehavior: Clip.hardEdge,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(Sizes.dimen_20),
-                        ),
-                        child: Image.network(
-                          widget.peerAvatar,
-                          width: Sizes.dimen_40,
-                          height: Sizes.dimen_40,
-                          fit: BoxFit.cover,
-                          loadingBuilder: (BuildContext ctx, Widget child,
-                              ImageChunkEvent? loadingProgress) {
-                            if (loadingProgress == null) return child;
-                            return Center(
-                              child: CircularProgressIndicator(
-                                color: AppColors.burgundy,
-                                value: loadingProgress.expectedTotalBytes !=
-                                            null &&
-                                        loadingProgress.expectedTotalBytes !=
-                                            null
-                                    ? loadingProgress.cumulativeBytesLoaded /
-                                        loadingProgress.expectedTotalBytes!
-                                    : null,
-                              ),
-                            );
-                          },
-                          errorBuilder: (context, object, stackTrace) {
-                            return const Icon(
-                              Icons.account_circle,
-                              size: 35,
-                              color: AppColors.greyColor,
-                            );
-                          },
-                        ),
-                      )
-                    : Container(
-                        width: 35,
-                      ),
-                chatMessages.type == MessageType.text
-                    ? messageBubble(
-                        color: AppColors.burgundy,
-                        textColor: AppColors.white,
-                        chatContent: chatMessages.content,
-                        margin: const EdgeInsets.only(left: Sizes.dimen_10),
-                      )
-                    : chatMessages.type == MessageType.image
-                        ? Container(
-                            margin: const EdgeInsets.only(
-                                left: Sizes.dimen_10, top: Sizes.dimen_10),
-                            child: chatImage(
-                                imageSrc: chatMessages.content, onTap: () {}),
-                          )
-                        : const SizedBox.shrink(),
-              ],
-            ),
-            isMessageReceived(index)
-                ? Container(
-                    margin: const EdgeInsets.only(
-                        left: Sizes.dimen_50,
-                        top: Sizes.dimen_6,
-                        bottom: Sizes.dimen_8),
-                    child: Text(
-                      DateFormat('dd MMM yyyy, hh:mm a').format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                          int.parse(chatMessages.timestamp),
-                        ),
-                      ),
-                      style: const TextStyle(
-                          color: AppColors.lightGrey,
-                          fontSize: Sizes.dimen_12,
-                          fontStyle: FontStyle.italic),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ],
-        );
-      }
-    } else {
-      return const SizedBox.shrink();
-    }
-  }
-
-  Widget buildListMessage() { // 모든 문자 메시지와 이미지가 보낸 사람과 받는 사람에 대해 별도로 표시되는 보기를 만드는 코드
-    return Flexible(
-      child: groupChatId.isNotEmpty
-          ? StreamBuilder<QuerySnapshot>(
-              stream: chatProvider.getChatMessage(groupChatId, _limit),
-              builder: (BuildContext context,
-                  AsyncSnapshot<QuerySnapshot> snapshot) {
-                if (snapshot.hasData) {
-                  listMessages = snapshot.data!.docs;
-                  if (listMessages.isNotEmpty) {
-                    return ListView.builder(
-                        padding: const EdgeInsets.all(10),
-                        itemCount: snapshot.data?.docs.length,
-                        reverse: true,
-                        controller: scrollController,
-                        itemBuilder: (context, index) =>
-                            buildItem(index, snapshot.data?.docs[index]));
-                  } else {
-                    return const Center(
-                      child: Text('No messages...'),
-                    );
-                  }
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.burgundy,
-                    ),
-                  );
-                }
-              })
-          : const Center(
-              child: CircularProgressIndicator(
-                color: AppColors.burgundy,
-              ),
-            ),
-    );
   }
 }

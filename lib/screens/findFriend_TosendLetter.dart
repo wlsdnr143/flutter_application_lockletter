@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -62,7 +63,7 @@ class _FindFriend_TosendLetterState extends State<FindFriend_TosendLetter> {
         context: context,
         builder: (BuildContext ctx) {
           return SimpleDialog(
-            backgroundColor: AppColors.burgundy,
+            backgroundColor: Colors.blue,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: const [
@@ -327,8 +328,10 @@ class _FindFriend_TosendLetterState extends State<FindFriend_TosendLetter> {
                 }
               },
               decoration: const InputDecoration.collapsed(
-                hintText: 'Search here...',
-                hintStyle: TextStyle(color: AppColors.white),
+                // filled: true,
+                // fillColor: Colors.blue,
+                hintText: '친구를 검색해주세요',
+                hintStyle: TextStyle(color: Colors.white54),
               ),
             ),
           ),
@@ -356,7 +359,7 @@ class _FindFriend_TosendLetterState extends State<FindFriend_TosendLetter> {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(Sizes.dimen_30),
-        color: AppColors.spaceLight,
+        color: Colors.lightBlueAccent.withOpacity(0.8),
       ),
     );
   }
@@ -378,9 +381,9 @@ class _FindFriend_TosendLetterState extends State<FindFriend_TosendLetter> {
                 MaterialPageRoute(
                     builder: (context) => ChatPage(
                       peerId: userChat.id,
-                      peerAvatar: userChat.photoUrl,
                       peerNickname: userChat.displayName,
-                      userAvatar: firebaseAuth.currentUser!.photoURL!,
+                      //peerAvatar: userChat.photoUrl,
+                      //userAvatar: firebaseAuth.currentUser!.photoURL!,
                     )));
           },
           child: ListTile(
